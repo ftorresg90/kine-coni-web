@@ -4,58 +4,77 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-MVP landing page (single-page) for kinesiologist Constanza Anjarí. Static site — no build step required. Open `index.html` directly in a browser or deploy the folder root to Netlify / Vercel.
+Full-stack CMS for kinesiologist Constanza Anjarí. Public landing page + admin dashboard with Supabase backend.
 
 ## Stack
 
-- **HTML5** — single file: `index.html`
-- **Tailwind CSS** — loaded via CDN (`https://cdn.tailwindcss.com`), configured inline with a `tailwind.config` script block. No PostCSS or build pipeline.
-- **Vanilla JavaScript** — all interactivity is in the `<script>` block at the bottom of `index.html`, organized into IIFE sections.
-- **Google Fonts** — Playfair Display (headings) + Lato (body), loaded via `<link>` in `<head>`.
+- **Next.js 16** — App Router, `src/` directory structure
+- **Tailwind CSS v4** — configured via `@theme inline` in `globals.css`
+- **Supabase** — Auth (email/password), PostgreSQL database, Row Level Security
+- **Google Fonts** — Playfair Display (headings) + Lato (body)
 
-## Design tokens (defined in the Tailwind config script)
+## Design tokens (defined in `src/app/globals.css`)
 
 | Token | Hex | Usage |
 |-------|-----|-------|
 | `nude` | `#F5E6E8` | Page background |
-| `nude-dark` | `#EDD5D9` | Hover backgrounds, placeholders |
+| `nude-dark` | `#EDD5D9` | Hover backgrounds |
 | `rosado` | `#C9848F` | Accents, icons, borders |
 | `rosado-dark` | `#A96370` | Hover state of rosado |
-| `vino` | `#5D2A33` | Primary text, buttons, headings |
+| `vino` | `#5D2A33` | Primary text, buttons |
 | `vino-light` | `#7A3D48` | Hover state of vino |
 
-## Page sections (by anchor ID)
+## Commands
 
-| ID | Section |
-|----|---------|
-| `#inicio` | Hero with photo, headline, CTAs |
-| `#servicios` | 4 service cards (musculoesquelética, neurorehabilitación, adulto mayor, respiratoria) |
-| `#resenas` | Testimonials carousel (3 reviews, auto-plays every 6 s) |
-| `#reserva` | Booking form — on submit opens WhatsApp with pre-filled message |
-| `#contacto` | Footer with contact info and zone coverage |
+| Command | Purpose |
+|---------|---------|
+| `npm run dev` | Start dev server (localhost:3000) |
+| `npm run build` | Production build |
 
-## Key JS behaviours (all in the `<script>` block)
+## File Structure
 
-1. **Navbar** — adds `.scrolled` class (blur + shadow) after 40 px scroll.
-2. **Mobile menu** — toggled by `#menu-btn`, closed by `closeMobileMenu()` on link click.
-3. **Carousel** — `#review-track` slides via `translateX`. Responsive: 1/2/3 slides visible at sm/md/lg. Auto-play pauses on hover.
-4. **Booking form** — client-side validation; on success, opens `wa.me` with URL-encoded pre-filled data and disables the form.
-5. **Fade-up animations** — `IntersectionObserver` adds `.visible` class when `.fade-up` elements enter the viewport.
-6. **Date input** — min set to today on page load.
+```
+src/
+├── app/
+│   ├── globals.css          <- Tailwind v4 theme + custom CSS
+│   ├── layout.jsx           <- Root layout (SEO, fonts)
+│   ├── page.jsx             <- Public landing (server component)
+│   └── admin/
+│       ├── layout.jsx       <- Admin sidebar (client)
+│       ├── page.jsx         <- Dashboard home (server)
+│       ├── login/page.jsx   <- Login form (client)
+│       ├── servicios/page.jsx
+│       ├── resenas/page.jsx
+│       ├── faq/page.jsx
+│       ├── perfil/page.jsx
+│       └── reservas/page.jsx
+├── components/
+│   ├── Navbar.jsx           <- Scroll + mobile menu
+│   ├── ReviewCarousel.jsx   <- Testimonials slider
+│   ├── FaqAccordion.jsx     <- FAQ expand/collapse
+│   ├── BookingForm.jsx      <- Form → Supabase + WhatsApp
+│   ├── WhatsAppButton.jsx   <- Floating button
+│   └── FadeUpObserver.jsx   <- Intersection observer animations
+├── lib/supabase/
+│   ├── client.js            <- Browser Supabase client
+│   └── server.js            <- Server Supabase client
+└── middleware.js             <- Auth guard for /admin/*
+```
 
-## Contact details embedded in the code
+## Database
 
-- WhatsApp: `+56982927833` — appears in the floating button, footer link, and the form's `wa.me` URL.
-- Email: `klga.conianjari@gmail.com` — footer `mailto:` link.
-- Zone: Viña del Mar, Valparaíso, Quilpué.
+Schema in `supabase/schema.sql`. Tables: `services`, `reviews`, `faqs`, `profile`, `bookings`.
 
-## Hero photo
+## Setup
 
-The `<img id="hero-photo">` has an empty `src`. To add the real photo:
-1. Place the image file in the project root (e.g. `foto-coni.webp`).
-2. Set `src="foto-coni.webp"` and remove the `hidden` class from the `<img>`.
-3. The `#photo-placeholder` div will auto-hide once the image loads (handled by the `onerror` fallback logic — invert the display logic if needed).
+1. Create Supabase project at https://supabase.com
+2. Run `supabase/schema.sql` in SQL Editor
+3. Create admin user in Supabase Auth dashboard
+4. Set `.env.local` with `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+5. `npm install && npm run dev`
 
-## Deployment
+## Contact details
 
-Drop the project folder on Netlify or Vercel — no build command, no output directory needed. The single `index.html` is the deployable artifact.
+- WhatsApp: `56982927833`
+- Email: `klga.conianjari@gmail.com`
+- Zone: Viña del Mar, Valparaíso, Quilpué, Con Con, Villa Alemana

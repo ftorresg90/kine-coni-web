@@ -1,0 +1,168 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-nude: #F5E6E8;
+  --color-nude-dark: #EDD5D9;
+  --color-rosado: #C9848F;
+  --color-rosado-dark: #A96370;
+  --color-vino: #5D2A33;
+  --color-vino-light: #7A3D48;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Lato', system-ui, sans-serif;
+}
+
+/* ── Tipografía base ── */
+body {
+  font-family: 'Lato', system-ui, sans-serif;
+  background-color: #F5E6E8;
+  color: #5D2A33;
+}
+
+h1, h2, h3, .font-serif {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+@media (min-width: 1024px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+/* ── Navbar blur al scroll ── */
+#navbar {
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+#navbar.scrolled {
+  background: rgba(245, 230, 232, 0.95);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 12px rgba(93, 42, 51, 0.12);
+}
+
+/* ── Línea decorativa bajo títulos ── */
+.section-title::after {
+  content: '';
+  display: block;
+  width: 56px;
+  height: 3px;
+  background: #C9848F;
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+/* ── Cards de servicio ── */
+.service-card {
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(93, 42, 51, 0.14);
+}
+
+/* ── Carrusel de reseñas ── */
+.review-track {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Input focus ── */
+.form-input:focus {
+  outline: none;
+  border-color: #C9848F;
+  box-shadow: 0 0 0 3px rgba(201, 132, 143, 0.25);
+}
+
+/* ── Fade-up al entrar en viewport ── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── WhatsApp botón: pulso periódico ── */
+#wa-btn {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#wa-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.5);
+}
+
+@keyframes wa-ping {
+  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.55); }
+  70% { box-shadow: 0 0 0 14px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+#wa-btn {
+  animation: wa-ping 2.5s ease-out infinite;
+}
+
+/* ── FAQ accordion ── */
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+}
+
+.faq-answer.open {
+  max-height: 300px;
+}
+
+.faq-icon {
+  transition: transform 0.3s ease;
+}
+
+.faq-item.open .faq-icon {
+  transform: rotate(45deg);
+}
+
+/* ── Paso del proceso ── */
+.step-card {
+  transition: transform 0.25s;
+}
+
+.step-card:hover {
+  transform: translateY(-4px);
+}
+
+/* ── Admin Dashboard ── */
+.admin-sidebar {
+  transition: transform 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .admin-sidebar {
+    transform: translateX(-100%);
+  }
+  .admin-sidebar.open {
+    transform: translateX(0);
+  }
+}
+
+/* Toast notification */
+.toast {
+  animation: toast-in 0.3s ease, toast-out 0.3s ease 2.7s forwards;
+}
+
+@keyframes toast-in {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes toast-out {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(100%); opacity: 0; }
+}
