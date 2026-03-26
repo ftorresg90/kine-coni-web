@@ -1,29 +1,36 @@
 <!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- SEO -->
-  <meta name="description" content="Kinesióloga Constanza Anjarí — Atención a domicilio en Viña del Mar y alrededores. Rehabilitación musculoesquelética, neurológica, adulto mayor y respiratoria." />
-  <meta name="keywords" content="kinesióloga domicilio, viña del mar, rehabilitación, adulto mayor, neurorehabilitación, kinesiología respiratoria" />
+  <meta name="description"
+    content="Kinesióloga Constanza Anjarí — Atención a domicilio en Viña del Mar y alrededores. Rehabilitación musculoesquelética, neurológica, adulto mayor y respiratoria." />
+  <meta name="keywords"
+    content="kinesióloga domicilio, viña del mar, rehabilitación, adulto mayor, neurorehabilitación, kinesiología respiratoria" />
   <title>Klga. Constanza Anjarí | Kinesiología a Domicilio · Viña del Mar</title>
 
   <!-- Open Graph (WhatsApp / redes sociales) -->
-  <meta property="og:type"        content="website" />
-  <meta property="og:title"       content="Klga. Constanza Anjarí | Kinesiología a Domicilio" />
-  <meta property="og:description" content="Atención kinesiológica personalizada a domicilio en Viña del Mar. Rehabilitación musculoesquelética, neurológica, adulto mayor y respiratoria." />
-  <meta property="og:image"       content="foto-coni.jpeg" />
-  <meta property="og:locale"      content="es_CL" />
-  <meta name="twitter:card"       content="summary_large_image" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Klga. Constanza Anjarí | Kinesiología a Domicilio" />
+  <meta property="og:description"
+    content="Atención kinesiológica personalizada a domicilio en Viña del Mar. Rehabilitación musculoesquelética, neurológica, adulto mayor y respiratoria." />
+  <meta property="og:image" content="foto-coni.jpg" />
+  <meta property="og:locale" content="es_CL" />
+  <meta name="twitter:card" content="summary_large_image" />
 
   <!-- Favicon emoji -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>" />
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>" />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
+    rel="stylesheet" />
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -32,16 +39,16 @@
       theme: {
         extend: {
           colors: {
-            nude:          '#F5E6E8',
-            'nude-dark':   '#EDD5D9',
-            rosado:        '#C9848F',
+            nude: '#F5E6E8',
+            'nude-dark': '#EDD5D9',
+            rosado: '#C9848F',
             'rosado-dark': '#A96370',
-            vino:          '#5D2A33',
-            'vino-light':  '#7A3D48',
+            vino: '#5D2A33',
+            'vino-light': '#7A3D48',
           },
           fontFamily: {
             serif: ['Playfair Display', 'Georgia', 'serif'],
-            sans:  ['Lato', 'system-ui', 'sans-serif'],
+            sans: ['Lato', 'system-ui', 'sans-serif'],
           },
         },
       },
@@ -50,13 +57,33 @@
 
   <style>
     /* ── Tipografía base ── */
-    body { font-family: 'Lato', system-ui, sans-serif; background-color: #F5E6E8; color: #5D2A33; }
-    h1, h2, h3, .font-serif { font-family: 'Playfair Display', Georgia, serif; }
-    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Lato', system-ui, sans-serif;
+      background-color: #F5E6E8;
+      color: #5D2A33;
+    }
+
+    h1,
+    h2,
+    h3,
+    .font-serif {
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     /* ── Navbar blur al scroll ── */
-    #navbar { transition: background 0.3s, box-shadow 0.3s; }
-    #navbar.scrolled { background: rgba(245,230,232,0.95); backdrop-filter: blur(8px); box-shadow: 0 2px 12px rgba(93,42,51,0.12); }
+    #navbar {
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+
+    #navbar.scrolled {
+      background: rgba(245, 230, 232, 0.95);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 2px 12px rgba(93, 42, 51, 0.12);
+    }
 
     /* ── Línea decorativa bajo títulos ── */
     .section-title::after {
@@ -70,38 +97,95 @@
     }
 
     /* ── Cards de servicio ── */
-    .service-card { transition: transform 0.25s, box-shadow 0.25s; }
-    .service-card:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(93,42,51,0.14); }
+    .service-card {
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(93, 42, 51, 0.14);
+    }
 
     /* ── Carrusel de reseñas ── */
-    .review-track { display: flex; transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); }
+    .review-track {
+      display: flex;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
     /* ── Input focus ── */
-    .form-input:focus { outline: none; border-color: #C9848F; box-shadow: 0 0 0 3px rgba(201,132,143,0.25); }
+    .form-input:focus {
+      outline: none;
+      border-color: #C9848F;
+      box-shadow: 0 0 0 3px rgba(201, 132, 143, 0.25);
+    }
 
     /* ── Fade-up al entrar en viewport ── */
-    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     /* ── WhatsApp botón: pulso periódico ── */
-    #wa-btn { transition: transform 0.2s, box-shadow 0.2s; }
-    #wa-btn:hover { transform: scale(1.08); box-shadow: 0 8px 24px rgba(37,211,102,0.5); }
-    @keyframes wa-ping {
-      0%   { box-shadow: 0 0 0 0 rgba(37,211,102,0.55); }
-      70%  { box-shadow: 0 0 0 14px rgba(37,211,102,0); }
-      100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
+    #wa-btn {
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-    #wa-btn { animation: wa-ping 2.5s ease-out infinite; }
+
+    #wa-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.5);
+    }
+
+    @keyframes wa-ping {
+      0% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.55);
+      }
+
+      70% {
+        box-shadow: 0 0 0 14px rgba(37, 211, 102, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+      }
+    }
+
+    #wa-btn {
+      animation: wa-ping 2.5s ease-out infinite;
+    }
 
     /* ── FAQ accordion ── */
-    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; }
-    .faq-answer.open { max-height: 300px; }
-    .faq-icon { transition: transform 0.3s ease; }
-    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+    }
+
+    .faq-answer.open {
+      max-height: 300px;
+    }
+
+    .faq-icon {
+      transition: transform 0.3s ease;
+    }
+
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+    }
 
     /* ── Paso del proceso ── */
-    .step-card { transition: transform 0.25s; }
-    .step-card:hover { transform: translateY(-4px); }
+    .step-card {
+      transition: transform 0.25s;
+    }
+
+    .step-card:hover {
+      transform: translateY(-4px);
+    }
   </style>
 </head>
 
@@ -114,39 +198,47 @@
     <nav class="max-w-6xl mx-auto flex items-center justify-between">
 
       <a href="#inicio" class="flex flex-col leading-tight group">
-        <span class="font-serif text-vino text-xl font-semibold tracking-wide group-hover:text-rosado transition-colors">Constanza Anjarí</span>
+        <span
+          class="font-serif text-vino text-xl font-semibold tracking-wide group-hover:text-rosado transition-colors">Constanza
+          Anjarí</span>
         <span class="text-xs font-sans text-rosado uppercase tracking-widest">Kinesióloga · U. Andrés Bello</span>
       </a>
 
       <ul class="hidden md:flex items-center gap-7 text-sm font-sans text-vino-light font-bold">
-        <li><a href="#sobre-mi"  class="hover:text-rosado transition-colors">Sobre mí</a></li>
+        <li><a href="#sobre-mi" class="hover:text-rosado transition-colors">Sobre mí</a></li>
         <li><a href="#servicios" class="hover:text-rosado transition-colors">Servicios</a></li>
         <li><a href="#como-funciona" class="hover:text-rosado transition-colors">¿Cómo funciona?</a></li>
-        <li><a href="#resenas"   class="hover:text-rosado transition-colors">Reseñas</a></li>
-        <li><a href="#faq"       class="hover:text-rosado transition-colors">FAQ</a></li>
+        <li><a href="#resenas" class="hover:text-rosado transition-colors">Reseñas</a></li>
+        <li><a href="#faq" class="hover:text-rosado transition-colors">FAQ</a></li>
       </ul>
 
       <div class="flex items-center gap-3">
         <a href="#reserva"
-           class="hidden sm:inline-block bg-vino text-nude text-sm font-sans font-bold px-5 py-2.5 rounded-full hover:bg-vino-light transition-colors shadow-md">
+          class="hidden sm:inline-block bg-vino text-nude text-sm font-sans font-bold px-5 py-2.5 rounded-full hover:bg-vino-light transition-colors shadow-md">
           Agendar Hora
         </a>
-        <button id="menu-btn" aria-label="Abrir menú" class="md:hidden p-2 rounded-lg hover:bg-nude-dark transition-colors">
+        <button id="menu-btn" aria-label="Abrir menú"
+          class="md:hidden p-2 rounded-lg hover:bg-nude-dark transition-colors">
           <svg class="w-6 h-6 text-vino" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
       </div>
     </nav>
 
     <!-- Menú mobile -->
-    <div id="mobile-menu" class="hidden md:hidden mt-4 bg-nude rounded-2xl shadow-xl p-6 space-y-3 text-center font-sans text-vino font-bold">
-      <a href="#sobre-mi"      class="block py-2 hover:text-rosado transition-colors" onclick="closeMobileMenu()">Sobre mí</a>
-      <a href="#servicios"     class="block py-2 hover:text-rosado transition-colors" onclick="closeMobileMenu()">Servicios</a>
-      <a href="#como-funciona" class="block py-2 hover:text-rosado transition-colors" onclick="closeMobileMenu()">¿Cómo funciona?</a>
-      <a href="#resenas"       class="block py-2 hover:text-rosado transition-colors" onclick="closeMobileMenu()">Reseñas</a>
-      <a href="#faq"           class="block py-2 hover:text-rosado transition-colors" onclick="closeMobileMenu()">FAQ</a>
-      <a href="#reserva"       class="block bg-vino text-nude py-3 rounded-full hover:bg-vino-light transition-colors" onclick="closeMobileMenu()">Agendar Hora</a>
+    <div id="mobile-menu"
+      class="hidden md:hidden mt-4 bg-nude rounded-2xl shadow-xl p-6 space-y-3 text-center font-sans text-vino font-bold">
+      <a href="#sobre-mi" class="block py-2 hover:text-rosado transition-colors" onclick="closeMobileMenu()">Sobre
+        mí</a>
+      <a href="#servicios" class="block py-2 hover:text-rosado transition-colors"
+        onclick="closeMobileMenu()">Servicios</a>
+      <a href="#como-funciona" class="block py-2 hover:text-rosado transition-colors" onclick="closeMobileMenu()">¿Cómo
+        funciona?</a>
+      <a href="#resenas" class="block py-2 hover:text-rosado transition-colors" onclick="closeMobileMenu()">Reseñas</a>
+      <a href="#faq" class="block py-2 hover:text-rosado transition-colors" onclick="closeMobileMenu()">FAQ</a>
+      <a href="#reserva" class="block bg-vino text-nude py-3 rounded-full hover:bg-vino-light transition-colors"
+        onclick="closeMobileMenu()">Agendar Hora</a>
     </div>
   </header>
 
@@ -158,7 +250,8 @@
     <div class="max-w-6xl mx-auto w-full grid md:grid-cols-2 gap-12 items-center">
 
       <div class="fade-up">
-        <span class="inline-block text-xs font-sans font-bold uppercase tracking-widest text-rosado mb-4 bg-rosado/10 px-3 py-1 rounded-full">
+        <span
+          class="inline-block text-xs font-sans font-bold uppercase tracking-widest text-rosado mb-4 bg-rosado/10 px-3 py-1 rounded-full">
           Atención a domicilio · Viña del Mar
         </span>
         <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl text-vino leading-tight mb-6">
@@ -172,11 +265,11 @@
         </p>
         <div class="flex flex-col sm:flex-row gap-4">
           <a href="#reserva"
-             class="bg-vino text-nude font-sans font-bold text-center px-8 py-4 rounded-full hover:bg-vino-light transition-colors shadow-lg">
+            class="bg-vino text-nude font-sans font-bold text-center px-8 py-4 rounded-full hover:bg-vino-light transition-colors shadow-lg">
             Agendar mi Hora
           </a>
           <a href="#servicios"
-             class="border-2 border-vino text-vino font-sans font-bold text-center px-8 py-4 rounded-full hover:bg-nude-dark transition-colors">
+            class="border-2 border-vino text-vino font-sans font-bold text-center px-8 py-4 rounded-full hover:bg-nude-dark transition-colors">
             Ver Servicios
           </a>
         </div>
@@ -195,18 +288,15 @@
         <div class="relative">
           <div class="absolute -top-4 -left-4 w-full h-full rounded-3xl bg-rosado/20 -z-10"></div>
           <div class="absolute -bottom-4 -right-4 w-full h-full rounded-3xl bg-vino/10 -z-10"></div>
-          <div class="w-72 h-80 md:w-80 md:h-96 rounded-3xl overflow-hidden shadow-2xl bg-nude-dark relative">
-            <img
-              src="foto-coni.jpeg"
-              alt="Kinesióloga Constanza Anjarí"
-              loading="eager"
-              style="position:absolute; top:0; left:-30%; width:160%; height:auto;"
-              onerror="this.style.display='none'; document.getElementById('photo-placeholder').style.display='flex'"
-            />
-            <div id="photo-placeholder" style="display:none" class="flex-col items-center gap-3 p-8 text-center h-full justify-center">
+          <div class="w-72 h-80 md:w-80 md:h-96 rounded-3xl overflow-hidden shadow-2xl bg-nude-dark">
+            <img src="foto-coni.jpeg" alt="Kinesióloga Constanza Anjarí" loading="eager"
+              style="width:100%; height:100%; object-fit:cover; object-position:50% 12%;"
+              onerror="this.style.display='none'; document.getElementById('photo-placeholder').style.display='flex'" />
+            <div id="photo-placeholder" style="display:none"
+              class="flex-col items-center gap-3 p-8 text-center h-full justify-center">
               <svg class="w-20 h-20 text-rosado/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
               </svg>
             </div>
           </div>
@@ -225,7 +315,8 @@
 
       <!-- Texto -->
       <div class="fade-up">
-        <span class="inline-block text-xs font-sans font-bold uppercase tracking-widest text-rosado mb-4 bg-rosado/10 px-3 py-1 rounded-full">
+        <span
+          class="inline-block text-xs font-sans font-bold uppercase tracking-widest text-rosado mb-4 bg-rosado/10 px-3 py-1 rounded-full">
           Conóceme
         </span>
         <h2 class="font-serif text-4xl text-vino mb-6 text-left">Sobre mí</h2>
@@ -243,15 +334,18 @@
         </p>
         <div class="flex flex-col gap-3">
           <div class="flex items-center gap-3 font-sans text-sm text-vino/80">
-            <span class="w-6 h-6 rounded-full bg-rosado/20 flex items-center justify-center text-rosado font-bold text-xs">✓</span>
+            <span
+              class="w-6 h-6 rounded-full bg-rosado/20 flex items-center justify-center text-rosado font-bold text-xs">✓</span>
             Titulada Universidad Andrés Bello
           </div>
           <div class="flex items-center gap-3 font-sans text-sm text-vino/80">
-            <span class="w-6 h-6 rounded-full bg-rosado/20 flex items-center justify-center text-rosado font-bold text-xs">✓</span>
+            <span
+              class="w-6 h-6 rounded-full bg-rosado/20 flex items-center justify-center text-rosado font-bold text-xs">✓</span>
             Especialización en adulto mayor y neurorehabilitación
           </div>
           <div class="flex items-center gap-3 font-sans text-sm text-vino/80">
-            <span class="w-6 h-6 rounded-full bg-rosado/20 flex items-center justify-center text-rosado font-bold text-xs">✓</span>
+            <span
+              class="w-6 h-6 rounded-full bg-rosado/20 flex items-center justify-center text-rosado font-bold text-xs">✓</span>
             Atención 100% personalizada y a domicilio
           </div>
         </div>
@@ -262,38 +356,46 @@
         <div class="bg-white/60 rounded-3xl p-6 border border-rosado/20 shadow-sm">
           <div class="w-10 h-10 rounded-2xl bg-rosado/15 flex items-center justify-center mb-4">
             <svg class="w-5 h-5 text-rosado" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
             </svg>
           </div>
           <h3 class="font-serif text-vino text-base mb-2">Calidez</h3>
-          <p class="font-sans text-xs text-vino/60 leading-relaxed">Trato cercano y empático con el paciente y su familia.</p>
+          <p class="font-sans text-xs text-vino/60 leading-relaxed">Trato cercano y empático con el paciente y su
+            familia.</p>
         </div>
         <div class="bg-white/60 rounded-3xl p-6 border border-rosado/20 shadow-sm">
           <div class="w-10 h-10 rounded-2xl bg-rosado/15 flex items-center justify-center mb-4">
             <svg class="w-5 h-5 text-rosado" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
             </svg>
           </div>
           <h3 class="font-serif text-vino text-base mb-2">Profesionalismo</h3>
-          <p class="font-sans text-xs text-vino/60 leading-relaxed">Evaluación rigurosa y tratamiento basado en evidencia.</p>
+          <p class="font-sans text-xs text-vino/60 leading-relaxed">Evaluación rigurosa y tratamiento basado en
+            evidencia.</p>
         </div>
         <div class="bg-white/60 rounded-3xl p-6 border border-rosado/20 shadow-sm">
           <div class="w-10 h-10 rounded-2xl bg-rosado/15 flex items-center justify-center mb-4">
             <svg class="w-5 h-5 text-rosado" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
           <h3 class="font-serif text-vino text-base mb-2">Puntualidad</h3>
-          <p class="font-sans text-xs text-vino/60 leading-relaxed">Respeto tu tiempo. Llego siempre en el horario acordado.</p>
+          <p class="font-sans text-xs text-vino/60 leading-relaxed">Respeto tu tiempo. Llego siempre en el horario
+            acordado.</p>
         </div>
         <div class="bg-vino rounded-3xl p-6 shadow-sm">
           <div class="w-10 h-10 rounded-2xl bg-nude/15 flex items-center justify-center mb-4">
             <svg class="w-5 h-5 text-nude" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
             </svg>
           </div>
           <h3 class="font-serif text-nude text-base mb-2">A domicilio</h3>
-          <p class="font-sans text-xs text-nude/70 leading-relaxed">Sin traslados. Me adapto a tu hogar y tus necesidades.</p>
+          <p class="font-sans text-xs text-nude/70 leading-relaxed">Sin traslados. Me adapto a tu hogar y tus
+            necesidades.</p>
         </div>
       </div>
 
@@ -321,42 +423,47 @@
           <div class="w-14 h-14 rounded-2xl bg-rosado/15 flex items-center justify-center mb-5">
             <svg class="w-7 h-7 text-rosado" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
-                d="M9 3H7a2 2 0 00-2 2v2m0 0a2 2 0 002 2h2m-4 0v8m0 0a2 2 0 002 2h2m0 0h2a2 2 0 002-2v-2m0 0a2 2 0 00-2-2h-2m4-8h2a2 2 0 012 2v2m0 0a2 2 0 01-2 2h-2m4 0v8m0 0a2 2 0 01-2 2h-2"/>
+                d="M9 3H7a2 2 0 00-2 2v2m0 0a2 2 0 002 2h2m-4 0v8m0 0a2 2 0 002 2h2m0 0h2a2 2 0 002-2v-2m0 0a2 2 0 00-2-2h-2m4-8h2a2 2 0 012 2v2m0 0a2 2 0 01-2 2h-2m4 0v8m0 0a2 2 0 01-2 2h-2" />
             </svg>
           </div>
-          <h3 class="font-serif text-lg text-vino mb-3">Rehabilitación<br/>Musculoesquelética</h3>
+          <h3 class="font-serif text-lg text-vino mb-3">Rehabilitación<br />Musculoesquelética</h3>
           <ul class="font-sans text-sm text-vino/70 space-y-1.5">
-            <li class="flex items-start gap-2"><span class="text-rosado mt-0.5">·</span> Lesiones musculares y articulares</li>
+            <li class="flex items-start gap-2"><span class="text-rosado mt-0.5">·</span> Lesiones musculares y
+              articulares</li>
             <li class="flex items-start gap-2"><span class="text-rosado mt-0.5">·</span> Artrosis y artritis</li>
             <li class="flex items-start gap-2"><span class="text-rosado mt-0.5">·</span> Postoperatorios</li>
             <li class="flex items-start gap-2"><span class="text-rosado mt-0.5">·</span> Tendinitis y bursitis</li>
           </ul>
         </div>
 
-        <div class="service-card fade-up bg-nude rounded-3xl p-7 shadow-sm border border-rosado/20" style="transition-delay:0.08s">
+        <div class="service-card fade-up bg-nude rounded-3xl p-7 shadow-sm border border-rosado/20"
+          style="transition-delay:0.08s">
           <div class="w-14 h-14 rounded-2xl bg-rosado/15 flex items-center justify-center mb-5">
             <svg class="w-7 h-7 text-rosado" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
-                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
             </svg>
           </div>
           <h3 class="font-serif text-lg text-vino mb-3">Neuro&shy;rehabilitación</h3>
           <ul class="font-sans text-sm text-vino/70 space-y-1.5">
-            <li class="flex items-start gap-2"><span class="text-rosado mt-0.5">·</span> Accidente Cerebrovascular (ACV)</li>
+            <li class="flex items-start gap-2"><span class="text-rosado mt-0.5">·</span> Accidente Cerebrovascular (ACV)
+            </li>
             <li class="flex items-start gap-2"><span class="text-rosado mt-0.5">·</span> Enfermedad de Parkinson</li>
-            <li class="flex items-start gap-2"><span class="text-rosado mt-0.5">·</span> Traumatismo Encéfalo Craneano</li>
+            <li class="flex items-start gap-2"><span class="text-rosado mt-0.5">·</span> Traumatismo Encéfalo Craneano
+            </li>
             <li class="flex items-start gap-2"><span class="text-rosado mt-0.5">·</span> Enfermedades neurológicas</li>
           </ul>
         </div>
 
-        <div class="service-card fade-up bg-nude rounded-3xl p-7 shadow-sm border border-rosado/20" style="transition-delay:0.16s">
+        <div class="service-card fade-up bg-nude rounded-3xl p-7 shadow-sm border border-rosado/20"
+          style="transition-delay:0.16s">
           <div class="w-14 h-14 rounded-2xl bg-rosado/15 flex items-center justify-center mb-5">
             <svg class="w-7 h-7 text-rosado" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
-                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
           </div>
-          <h3 class="font-serif text-lg text-vino mb-3">Kinesiología<br/>Adulto Mayor</h3>
+          <h3 class="font-serif text-lg text-vino mb-3">Kinesiología<br />Adulto Mayor</h3>
           <ul class="font-sans text-sm text-vino/70 space-y-1.5">
             <li class="flex items-start gap-2"><span class="text-rosado mt-0.5">·</span> Prevención de caídas</li>
             <li class="flex items-start gap-2"><span class="text-rosado mt-0.5">·</span> Fortalecimiento muscular</li>
@@ -365,16 +472,18 @@
           </ul>
         </div>
 
-        <div class="service-card fade-up bg-nude rounded-3xl p-7 shadow-sm border border-rosado/20" style="transition-delay:0.24s">
+        <div class="service-card fade-up bg-nude rounded-3xl p-7 shadow-sm border border-rosado/20"
+          style="transition-delay:0.24s">
           <div class="w-14 h-14 rounded-2xl bg-rosado/15 flex items-center justify-center mb-5">
             <svg class="w-7 h-7 text-rosado" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
-                d="M12 4v4m0 0C10 8 7 9 5 12s-1 6 1 8c1.5 1.5 3 1.5 4 1 .5-.25 1-.75 1.5-1.5M12 8c2 0 5 1 7 4s1 6-1 8c-1.5 1.5-3 1.5-4 1-.5-.25-1-.75-1.5-1.5"/>
+                d="M12 4v4m0 0C10 8 7 9 5 12s-1 6 1 8c1.5 1.5 3 1.5 4 1 .5-.25 1-.75 1.5-1.5M12 8c2 0 5 1 7 4s1 6-1 8c-1.5 1.5-3 1.5-4 1-.5-.25-1-.75-1.5-1.5" />
             </svg>
           </div>
-          <h3 class="font-serif text-lg text-vino mb-3">Kinesiología<br/>Respiratoria</h3>
+          <h3 class="font-serif text-lg text-vino mb-3">Kinesiología<br />Respiratoria</h3>
           <ul class="font-sans text-sm text-vino/70 space-y-1.5">
-            <li class="flex items-start gap-2"><span class="text-rosado mt-0.5">·</span> EPOC y enfermedades crónicas</li>
+            <li class="flex items-start gap-2"><span class="text-rosado mt-0.5">·</span> EPOC y enfermedades crónicas
+            </li>
             <li class="flex items-start gap-2"><span class="text-rosado mt-0.5">·</span> Neumonía y bronquitis</li>
             <li class="flex items-start gap-2"><span class="text-rosado mt-0.5">·</span> Manejo de secreciones</li>
             <li class="flex items-start gap-2"><span class="text-rosado mt-0.5">·</span> Rehabilitación post-COVID</li>
@@ -402,40 +511,48 @@
       <div class="grid md:grid-cols-3 gap-6 relative">
 
         <!-- Línea conectora (solo desktop) -->
-        <div class="hidden md:block absolute top-10 left-[calc(16.67%+16px)] right-[calc(16.67%+16px)] h-0.5 bg-rosado/30"></div>
+        <div
+          class="hidden md:block absolute top-10 left-[calc(16.67%+16px)] right-[calc(16.67%+16px)] h-0.5 bg-rosado/30">
+        </div>
 
         <!-- Paso 1 -->
         <div class="step-card fade-up text-center">
-          <div class="relative inline-flex w-20 h-20 rounded-full bg-rosado/15 items-center justify-center mb-6 mx-auto border-2 border-rosado/30">
+          <div
+            class="relative inline-flex w-20 h-20 rounded-full bg-rosado/15 items-center justify-center mb-6 mx-auto border-2 border-rosado/30">
             <span class="font-serif text-3xl font-bold text-rosado">1</span>
             <span class="absolute -top-2 -right-2 w-6 h-6 bg-vino rounded-full"></span>
           </div>
           <h3 class="font-serif text-xl text-vino mb-3">Contáctame</h3>
           <p class="font-sans text-sm text-vino/70 leading-relaxed">
-            Escríbeme por WhatsApp o completa el formulario de reserva con tus datos y el tipo de atención que necesitas.
+            Escríbeme por WhatsApp o completa el formulario de reserva con tus datos y el tipo de atención que
+            necesitas.
           </p>
         </div>
 
         <!-- Paso 2 -->
         <div class="step-card fade-up text-center" style="transition-delay:0.12s">
-          <div class="relative inline-flex w-20 h-20 rounded-full bg-rosado/15 items-center justify-center mb-6 mx-auto border-2 border-rosado/30">
+          <div
+            class="relative inline-flex w-20 h-20 rounded-full bg-rosado/15 items-center justify-center mb-6 mx-auto border-2 border-rosado/30">
             <span class="font-serif text-3xl font-bold text-rosado">2</span>
             <span class="absolute -top-2 -right-2 w-6 h-6 bg-vino rounded-full"></span>
           </div>
           <h3 class="font-serif text-xl text-vino mb-3">Evaluación inicial</h3>
           <p class="font-sans text-sm text-vino/70 leading-relaxed">
-            En la primera sesión realizo una evaluación completa del paciente en su hogar para diseñar un plan de tratamiento personalizado.
+            En la primera sesión realizo una evaluación completa del paciente en su hogar para diseñar un plan de
+            tratamiento personalizado.
           </p>
         </div>
 
         <!-- Paso 3 -->
         <div class="step-card fade-up text-center" style="transition-delay:0.24s">
-          <div class="relative inline-flex w-20 h-20 rounded-full bg-vino items-center justify-center mb-6 mx-auto border-2 border-vino">
+          <div
+            class="relative inline-flex w-20 h-20 rounded-full bg-vino items-center justify-center mb-6 mx-auto border-2 border-vino">
             <span class="font-serif text-3xl font-bold text-nude">3</span>
           </div>
           <h3 class="font-serif text-xl text-vino mb-3">¡A recuperarse!</h3>
           <p class="font-sans text-sm text-vino/70 leading-relaxed">
-            Comenzamos el tratamiento con sesiones regulares, con seguimiento continuo del avance y ajustes cuando sea necesario.
+            Comenzamos el tratamiento con sesiones regulares, con seguimiento continuo del avance y ajustes cuando sea
+            necesario.
           </p>
         </div>
 
@@ -444,7 +561,7 @@
       <!-- CTA bajo el proceso -->
       <div class="text-center mt-12 fade-up">
         <a href="#reserva"
-           class="inline-block bg-vino text-nude font-sans font-bold px-10 py-4 rounded-full hover:bg-vino-light transition-colors shadow-lg">
+          class="inline-block bg-vino text-nude font-sans font-bold px-10 py-4 rounded-full hover:bg-vino-light transition-colors shadow-lg">
           Comenzar ahora
         </a>
       </div>
@@ -469,15 +586,20 @@
       <div class="relative overflow-hidden fade-up">
         <div id="review-track" class="review-track gap-6">
 
-          <div class="review-slide min-w-full sm:min-w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] bg-nude rounded-3xl p-8 border border-rosado/20 shadow-sm flex-shrink-0">
+          <div
+            class="review-slide min-w-full sm:min-w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] bg-nude rounded-3xl p-8 border border-rosado/20 shadow-sm flex-shrink-0">
             <div class="flex gap-1 mb-4">
               <span class="text-rosado text-lg">★★★★★</span>
             </div>
             <p class="font-sans text-vino/80 leading-relaxed mb-6 italic">
-              "Después del ACV de mi papá, Constanza fue fundamental en su recuperación. Su paciencia y profesionalismo son admirables. En tres meses mi padre volvió a caminar de forma independiente. No puedo agradecerle lo suficiente."
+              "Después del ACV de mi papá, Constanza fue fundamental en su recuperación. Su paciencia y profesionalismo
+              son admirables. En tres meses mi padre volvió a caminar de forma independiente. No puedo agradecerle lo
+              suficiente."
             </p>
             <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-full bg-rosado/30 flex items-center justify-center font-serif font-bold text-vino">M</div>
+              <div
+                class="w-10 h-10 rounded-full bg-rosado/30 flex items-center justify-center font-serif font-bold text-vino">
+                M</div>
               <div>
                 <p class="font-sans font-bold text-vino text-sm">María José Herrera</p>
                 <p class="font-sans text-xs text-vino/50">Hija de paciente · Viña del Mar</p>
@@ -485,15 +607,20 @@
             </div>
           </div>
 
-          <div class="review-slide min-w-full sm:min-w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] bg-nude rounded-3xl p-8 border border-rosado/20 shadow-sm flex-shrink-0">
+          <div
+            class="review-slide min-w-full sm:min-w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] bg-nude rounded-3xl p-8 border border-rosado/20 shadow-sm flex-shrink-0">
             <div class="flex gap-1 mb-4">
               <span class="text-rosado text-lg">★★★★★</span>
             </div>
             <p class="font-sans text-vino/80 leading-relaxed mb-6 italic">
-              "Tuve una tendinitis de hombro que me impedía trabajar. Constanza me evaluó el primer día y diseñó un plan de tratamiento claro. A las 6 sesiones ya tenía un 90% de movilidad. Muy recomendable, puntual y muy dedicada."
+              "Tuve una tendinitis de hombro que me impedía trabajar. Constanza me evaluó el primer día y diseñó un plan
+              de tratamiento claro. A las 6 sesiones ya tenía un 90% de movilidad. Muy recomendable, puntual y muy
+              dedicada."
             </p>
             <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-full bg-rosado/30 flex items-center justify-center font-serif font-bold text-vino">C</div>
+              <div
+                class="w-10 h-10 rounded-full bg-rosado/30 flex items-center justify-center font-serif font-bold text-vino">
+                C</div>
               <div>
                 <p class="font-sans font-bold text-vino text-sm">Carlos Reyes Molina</p>
                 <p class="font-sans text-xs text-vino/50">Paciente · Quilpué</p>
@@ -501,15 +628,20 @@
             </div>
           </div>
 
-          <div class="review-slide min-w-full sm:min-w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] bg-nude rounded-3xl p-8 border border-rosado/20 shadow-sm flex-shrink-0">
+          <div
+            class="review-slide min-w-full sm:min-w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] bg-nude rounded-3xl p-8 border border-rosado/20 shadow-sm flex-shrink-0">
             <div class="flex gap-1 mb-4">
               <span class="text-rosado text-lg">★★★★★</span>
             </div>
             <p class="font-sans text-vino/80 leading-relaxed mb-6 italic">
-              "Mi mamá tiene Parkinson y temíamos que perdiera la movilidad. Con Coni encontramos una kinesióloga que la trata con un cariño enorme. Los ejercicios la tienen mucho más activa y ella siempre espera la sesión con alegría."
+              "Mi mamá tiene Parkinson y temíamos que perdiera la movilidad. Con Coni encontramos una kinesióloga que la
+              trata con un cariño enorme. Los ejercicios la tienen mucho más activa y ella siempre espera la sesión con
+              alegría."
             </p>
             <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-full bg-rosado/30 flex items-center justify-center font-serif font-bold text-vino">A</div>
+              <div
+                class="w-10 h-10 rounded-full bg-rosado/30 flex items-center justify-center font-serif font-bold text-vino">
+                A</div>
               <div>
                 <p class="font-sans font-bold text-vino text-sm">Andrea Figueroa</p>
                 <p class="font-sans text-xs text-vino/50">Hija de paciente · Viña del Mar</p>
@@ -552,7 +684,9 @@
             <span class="faq-icon text-rosado text-2xl font-light flex-shrink-0">+</span>
           </button>
           <div class="faq-answer px-6 font-sans text-sm text-vino/70 leading-relaxed">
-            <p class="pb-5">Cada sesión tiene una duración aproximada de 45 a 60 minutos, dependiendo del tipo de tratamiento y la evolución del paciente. La primera sesión puede extenderse un poco más, ya que incluye la evaluación inicial completa.</p>
+            <p class="pb-5">Cada sesión tiene una duración aproximada de 45 a 60 minutos, dependiendo del tipo de
+              tratamiento y la evolución del paciente. La primera sesión puede extenderse un poco más, ya que incluye la
+              evaluación inicial completa.</p>
           </div>
         </div>
 
@@ -562,7 +696,9 @@
             <span class="faq-icon text-rosado text-2xl font-light flex-shrink-0">+</span>
           </button>
           <div class="faq-answer px-6 font-sans text-sm text-vino/70 leading-relaxed">
-            <p class="pb-5">Solo necesitas un espacio libre de al menos 2 metros cuadrados y una silla o cama disponible. Yo llevo todo el material necesario: implementos de evaluación, elementos para ejercicios y cualquier equipo que requiera el tratamiento.</p>
+            <p class="pb-5">Solo necesitas un espacio libre de al menos 2 metros cuadrados y una silla o cama
+              disponible. Yo llevo todo el material necesario: implementos de evaluación, elementos para ejercicios y
+              cualquier equipo que requiera el tratamiento.</p>
           </div>
         </div>
 
@@ -572,7 +708,9 @@
             <span class="faq-icon text-rosado text-2xl font-light flex-shrink-0">+</span>
           </button>
           <div class="faq-answer px-6 font-sans text-sm text-vino/70 leading-relaxed">
-            <p class="pb-5">Actualmente trabajo con pago particular. Si tienes Isapre, puedo emitir boleta con el código de prestación correspondiente para que tú puedas solicitar el reembolso directamente a tu seguro de salud. Consulta los montos de reembolso con tu Isapre.</p>
+            <p class="pb-5">Actualmente trabajo con pago particular. Si tienes Isapre, puedo emitir boleta con el código
+              de prestación correspondiente para que tú puedas solicitar el reembolso directamente a tu seguro de salud.
+              Consulta los montos de reembolso con tu Isapre.</p>
           </div>
         </div>
 
@@ -582,7 +720,9 @@
             <span class="faq-icon text-rosado text-2xl font-light flex-shrink-0">+</span>
           </button>
           <div class="faq-answer px-6 font-sans text-sm text-vino/70 leading-relaxed">
-            <p class="pb-5">Depende del diagnóstico y los objetivos de cada persona. En general, una lesión aguda puede resolverse en 6 a 10 sesiones, mientras que procesos neurológicos o patologías crónicas requieren tratamiento más prolongado y continuo. Lo definimos juntos en la evaluación inicial.</p>
+            <p class="pb-5">Depende del diagnóstico y los objetivos de cada persona. En general, una lesión aguda puede
+              resolverse en 6 a 10 sesiones, mientras que procesos neurológicos o patologías crónicas requieren
+              tratamiento más prolongado y continuo. Lo definimos juntos en la evaluación inicial.</p>
           </div>
         </div>
 
@@ -592,7 +732,8 @@
             <span class="faq-icon text-rosado text-2xl font-light flex-shrink-0">+</span>
           </button>
           <div class="faq-answer px-6 font-sans text-sm text-vino/70 leading-relaxed">
-            <p class="pb-5">Atiendo en Viña del Mar, Valparaíso, Quilpué, Villa Alemana y Con Con. Si tienes dudas sobre si llego a tu sector, escríbeme y lo confirmamos sin compromiso.</p>
+            <p class="pb-5">Atiendo en Viña del Mar, Valparaíso, Quilpué, Villa Alemana y Con Con. Si tienes dudas sobre
+              si llego a tu sector, escríbeme y lo confirmamos sin compromiso.</p>
           </div>
         </div>
 
@@ -612,11 +753,12 @@
             <h2 class="font-serif text-3xl text-vino mb-4">Zona de cobertura</h2>
             <div class="w-12 h-0.5 bg-rosado mb-6 rounded-full"></div>
             <p class="font-sans text-vino/70 text-sm leading-relaxed mb-6">
-              Llevo la kinesiología hasta tu hogar en toda la región de Valparaíso. Si no estás seguro/a si llego a tu sector, escríbeme — siempre buscamos una solución.
+              Llevo la kinesiología hasta tu hogar en toda la región de Valparaíso. Si no estás seguro/a si llego a tu
+              sector, escríbeme — siempre buscamos una solución.
             </p>
             <a href="https://wa.me/56982927833?text=Hola%20Constanza%2C%20quiero%20saber%20si%20llegas%20a%20mi%20sector."
-               target="_blank" rel="noopener noreferrer"
-               class="inline-block bg-vino text-nude font-sans font-bold px-7 py-3 rounded-full hover:bg-vino-light transition-colors shadow-md text-sm">
+              target="_blank" rel="noopener noreferrer"
+              class="inline-block bg-vino text-nude font-sans font-bold px-7 py-3 rounded-full hover:bg-vino-light transition-colors shadow-md text-sm">
               Consultar mi sector
             </a>
           </div>
@@ -676,21 +818,20 @@
         </p>
       </div>
 
-      <form id="booking-form" class="fade-up bg-nude rounded-3xl p-8 md:p-10 shadow-md border border-rosado/20 space-y-6" novalidate>
+      <form id="booking-form"
+        class="fade-up bg-nude rounded-3xl p-8 md:p-10 shadow-md border border-rosado/20 space-y-6" novalidate>
 
         <div>
           <label for="nombre" class="block font-sans text-sm font-bold text-vino mb-2">Nombre completo *</label>
-          <input type="text" id="nombre" name="nombre" required autocomplete="name"
-            placeholder="Ej. Juan González"
-            class="form-input w-full bg-white/70 border border-rosado/30 rounded-xl px-4 py-3 font-sans text-vino placeholder-vino/30 transition-all"/>
+          <input type="text" id="nombre" name="nombre" required autocomplete="name" placeholder="Ej. Juan González"
+            class="form-input w-full bg-white/70 border border-rosado/30 rounded-xl px-4 py-3 font-sans text-vino placeholder-vino/30 transition-all" />
           <p class="error-msg hidden mt-1 text-xs text-red-500 font-sans">Por favor ingresa tu nombre.</p>
         </div>
 
         <div>
           <label for="telefono" class="block font-sans text-sm font-bold text-vino mb-2">Teléfono / WhatsApp *</label>
-          <input type="tel" id="telefono" name="telefono" required autocomplete="tel"
-            placeholder="+56 9 XXXX XXXX"
-            class="form-input w-full bg-white/70 border border-rosado/30 rounded-xl px-4 py-3 font-sans text-vino placeholder-vino/30 transition-all"/>
+          <input type="tel" id="telefono" name="telefono" required autocomplete="tel" placeholder="+56 9 XXXX XXXX"
+            class="form-input w-full bg-white/70 border border-rosado/30 rounded-xl px-4 py-3 font-sans text-vino placeholder-vino/30 transition-all" />
           <p class="error-msg hidden mt-1 text-xs text-red-500 font-sans">Por favor ingresa tu número de teléfono.</p>
         </div>
 
@@ -712,7 +853,7 @@
           <div>
             <label for="fecha" class="block font-sans text-sm font-bold text-vino mb-2">Fecha preferida *</label>
             <input type="date" id="fecha" name="fecha" required
-              class="form-input w-full bg-white/70 border border-rosado/30 rounded-xl px-4 py-3 font-sans text-vino transition-all"/>
+              class="form-input w-full bg-white/70 border border-rosado/30 rounded-xl px-4 py-3 font-sans text-vino transition-all" />
             <p class="error-msg hidden mt-1 text-xs text-red-500 font-sans">Selecciona una fecha.</p>
           </div>
           <div>
@@ -741,7 +882,8 @@
 
         <div id="form-success" class="hidden text-center py-4">
           <p class="font-serif text-vino text-xl mb-1">¡Solicitud enviada!</p>
-          <p class="font-sans text-vino/70 text-sm">Constanza te contactará en menos de 24 horas para confirmar tu cita.</p>
+          <p class="font-sans text-vino/70 text-sm">Constanza te contactará en menos de 24 horas para confirmar tu cita.
+          </p>
         </div>
 
       </form>
@@ -768,15 +910,16 @@
         <ul class="space-y-3 font-sans text-sm text-nude/80">
           <li class="flex items-center gap-3">
             <svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
             </svg>
             <a href="https://wa.me/56982927833" target="_blank" rel="noopener noreferrer"
-               class="hover:text-white transition-colors">+569 8292 7833</a>
+              class="hover:text-white transition-colors">+569 8292 7833</a>
           </li>
           <li class="flex items-center gap-3">
             <svg class="w-5 h-5 text-rosado flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
-                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
             <a href="mailto:klga.conianjari@gmail.com" class="hover:text-white transition-colors break-all">
               klga.conianjari@gmail.com
@@ -785,10 +928,11 @@
           <li class="flex items-start gap-3">
             <svg class="w-5 h-5 text-rosado flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
-                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
-            <span class="text-nude/80">Viña del Mar, Valparaíso,<br/>Quilpué, Con Con y alrededores</span>
+            <span class="text-nude/80">Viña del Mar, Valparaíso,<br />Quilpué, Con Con y alrededores</span>
           </li>
         </ul>
       </div>
@@ -796,19 +940,20 @@
       <div>
         <h3 class="font-serif text-lg mb-5">Navegación</h3>
         <ul class="space-y-2 font-sans text-sm text-nude/80">
-          <li><a href="#inicio"        class="hover:text-white transition-colors">Inicio</a></li>
-          <li><a href="#sobre-mi"      class="hover:text-white transition-colors">Sobre mí</a></li>
-          <li><a href="#servicios"     class="hover:text-white transition-colors">Servicios</a></li>
+          <li><a href="#inicio" class="hover:text-white transition-colors">Inicio</a></li>
+          <li><a href="#sobre-mi" class="hover:text-white transition-colors">Sobre mí</a></li>
+          <li><a href="#servicios" class="hover:text-white transition-colors">Servicios</a></li>
           <li><a href="#como-funciona" class="hover:text-white transition-colors">¿Cómo funciona?</a></li>
-          <li><a href="#resenas"       class="hover:text-white transition-colors">Reseñas</a></li>
-          <li><a href="#faq"           class="hover:text-white transition-colors">Preguntas frecuentes</a></li>
-          <li><a href="#reserva"       class="hover:text-white transition-colors">Agendar Hora</a></li>
+          <li><a href="#resenas" class="hover:text-white transition-colors">Reseñas</a></li>
+          <li><a href="#faq" class="hover:text-white transition-colors">Preguntas frecuentes</a></li>
+          <li><a href="#reserva" class="hover:text-white transition-colors">Agendar Hora</a></li>
         </ul>
       </div>
 
     </div>
 
-    <div class="max-w-6xl mx-auto mt-10 pt-6 border-t border-nude/15 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs font-sans text-nude/40">
+    <div
+      class="max-w-6xl mx-auto mt-10 pt-6 border-t border-nude/15 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs font-sans text-nude/40">
       <p>© 2025 Constanza Anjarí · Kinesióloga. Todos los derechos reservados.</p>
       <p>Hecho con cuidado en Viña del Mar, Chile 🌊</p>
     </div>
@@ -819,12 +964,12 @@
        BOTÓN FLOTANTE WHATSAPP (con pulso)
   ════════════════════════════════════════════ -->
   <a id="wa-btn"
-     href="https://wa.me/56982927833?text=Hola%20Constanza%2C%20me%20gustar%C3%ADa%20agendar%20una%20sesi%C3%B3n%20de%20kinesiolog%C3%ADa."
-     target="_blank" rel="noopener noreferrer"
-     aria-label="Contáctame por WhatsApp"
-     class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-green-500 rounded-full flex items-center justify-center shadow-xl">
+    href="https://wa.me/56982927833?text=Hola%20Constanza%2C%20me%20gustar%C3%ADa%20agendar%20una%20sesi%C3%B3n%20de%20kinesiolog%C3%ADa."
+    target="_blank" rel="noopener noreferrer" aria-label="Contáctame por WhatsApp"
+    class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-green-500 rounded-full flex items-center justify-center shadow-xl">
     <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      <path
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
     </svg>
   </a>
 
@@ -849,14 +994,14 @@
 
     // ── 3. Carrusel de reseñas ──
     (function () {
-      const track   = document.getElementById('review-track');
-      const slides  = Array.from(track.querySelectorAll('.review-slide'));
+      const track = document.getElementById('review-track');
+      const slides = Array.from(track.querySelectorAll('.review-slide'));
       const dotsBox = document.getElementById('dots');
-      let current   = 0;
+      let current = 0;
 
       function slidesVisible() {
         if (window.innerWidth >= 1024) return 3;
-        if (window.innerWidth >= 640)  return 2;
+        if (window.innerWidth >= 640) return 2;
         return 1;
       }
       function maxIndex() { return Math.max(0, slides.length - slidesVisible()); }
@@ -912,13 +1057,13 @@
 
         if (!valid) return;
 
-        const nombre   = document.getElementById('nombre').value.trim();
+        const nombre = document.getElementById('nombre').value.trim();
         const telefono = document.getElementById('telefono').value.trim();
-        const sel      = document.getElementById('servicio');
+        const sel = document.getElementById('servicio');
         const servicio = sel.options[sel.selectedIndex].text;
-        const fecha    = document.getElementById('fecha').value;
-        const hora     = document.getElementById('hora').value || 'sin preferencia';
-        const mensaje  = document.getElementById('mensaje').value.trim();
+        const fecha = document.getElementById('fecha').value;
+        const hora = document.getElementById('hora').value || 'sin preferencia';
+        const mensaje = document.getElementById('mensaje').value.trim();
 
         const waText = encodeURIComponent(
           `Hola Constanza, quiero agendar una hora 🌸\n` +
@@ -967,12 +1112,12 @@
       const obs = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (!entry.isIntersecting) return;
-          const el     = entry.target;
+          const el = entry.target;
           const target = parseInt(el.dataset.target, 10);
           const suffix = el.dataset.suffix || '';
           const duration = 1200;
-          const step   = target / (duration / 16);
-          let current  = 0;
+          const step = target / (duration / 16);
+          let current = 0;
 
           const tick = () => {
             current = Math.min(current + step, target);
@@ -990,7 +1135,7 @@
     // ── 8. FAQ accordion ──
     document.querySelectorAll('.faq-trigger').forEach(btn => {
       btn.addEventListener('click', () => {
-        const item   = btn.closest('.faq-item');
+        const item = btn.closest('.faq-item');
         const answer = item.querySelector('.faq-answer');
         const isOpen = item.classList.contains('open');
 
@@ -1010,4 +1155,5 @@
   </script>
 
 </body>
+
 </html>
