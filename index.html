@@ -179,19 +179,18 @@
           <div class="w-72 h-80 md:w-80 md:h-96 rounded-3xl overflow-hidden shadow-2xl bg-nude-dark flex items-center justify-center">
             <img
               id="hero-photo"
-              src=""
+              src="foto-coni.jpeg"
               alt="Kinesióloga Constanza Anjarí"
-              class="w-full h-full object-cover object-top hidden"
+              class="w-full h-full object-cover object-top"
               onerror="this.classList.add('hidden'); document.getElementById('photo-placeholder').classList.remove('hidden')"
             />
-            <!-- Placeholder hasta que se suba la foto real -->
-            <div id="photo-placeholder" class="flex flex-col items-center gap-3 p-8 text-center">
+            <!-- Placeholder de respaldo -->
+            <div id="photo-placeholder" class="hidden flex flex-col items-center gap-3 p-8 text-center">
               <svg class="w-20 h-20 text-rosado/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                   d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
               </svg>
               <p class="font-serif text-vino/40 text-sm italic">Foto profesional<br/>de Constanza</p>
-              <p class="font-sans text-xs text-vino/30">Reemplaza el src del img con tu foto</p>
             </div>
           </div>
         </div>
