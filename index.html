@@ -185,9 +185,6 @@
             <span class="text-rosado text-xl">✦</span> Titulada U. Andrés Bello
           </div>
           <div class="flex items-center gap-2 text-sm text-vino/70">
-            <span class="text-rosado text-xl">✦</span> +100 pacientes atendidos
-          </div>
-          <div class="flex items-center gap-2 text-sm text-vino/70">
             <span class="text-rosado text-xl">✦</span> Cobertura Viña del Mar
           </div>
         </div>
@@ -198,12 +195,12 @@
         <div class="relative">
           <div class="absolute -top-4 -left-4 w-full h-full rounded-3xl bg-rosado/20 -z-10"></div>
           <div class="absolute -bottom-4 -right-4 w-full h-full rounded-3xl bg-vino/10 -z-10"></div>
-          <div class="w-72 h-80 md:w-80 md:h-96 rounded-3xl overflow-hidden shadow-2xl bg-nude-dark">
+          <div class="w-72 h-80 md:w-80 md:h-96 rounded-3xl overflow-hidden shadow-2xl bg-nude-dark relative">
             <img
               src="foto-coni.jpeg"
               alt="Kinesióloga Constanza Anjarí"
               loading="eager"
-              style="width:100%; height:100%; object-fit:cover; object-position:50% 12%;"
+              style="position:absolute; top:0; left:-30%; width:160%; height:auto;"
               onerror="this.style.display='none'; document.getElementById('photo-placeholder').style.display='flex'"
             />
             <div id="photo-placeholder" style="display:none" class="flex-col items-center gap-3 p-8 text-center h-full justify-center">
@@ -216,31 +213,6 @@
         </div>
       </div>
 
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════════════════════════
-       STATS COUNTER
-  ════════════════════════════════════════════ -->
-  <section class="py-12 px-6 md:px-12 bg-vino">
-    <div class="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-      <div class="fade-up">
-        <p class="font-serif text-4xl font-bold text-nude" data-target="100" data-suffix="+">0</p>
-        <p class="font-sans text-sm text-nude/70 mt-1">Pacientes atendidos</p>
-      </div>
-      <div class="fade-up" style="transition-delay:0.08s">
-        <p class="font-serif text-4xl font-bold text-nude" data-target="4" data-suffix="">0</p>
-        <p class="font-sans text-sm text-nude/70 mt-1">Especialidades</p>
-      </div>
-      <div class="fade-up" style="transition-delay:0.16s">
-        <p class="font-serif text-4xl font-bold text-nude" data-target="5" data-suffix="">0</p>
-        <p class="font-sans text-sm text-nude/70 mt-1">Comunas de cobertura</p>
-      </div>
-      <div class="fade-up" style="transition-delay:0.24s">
-        <p class="font-serif text-4xl font-bold text-nude" data-target="100" data-suffix="%">0</p>
-        <p class="font-sans text-sm text-nude/70 mt-1">A domicilio</p>
-      </div>
     </div>
   </section>
 
@@ -265,7 +237,7 @@
           efectiva en un entorno familiar y seguro.
         </p>
         <p class="font-sans text-vino/80 leading-relaxed mb-8">
-          Me especializo en neurorehabilitación, kinesiología musculoesquelética, respiratoria y en la
+          Me enfoco en neurorehabilitación, kinesiología musculoesquelética, respiratoria y en la
           mantención funcional del adulto mayor. Cada tratamiento lo diseño de forma personalizada,
           considerando la historia clínica, el entorno del hogar y los objetivos de cada persona y su familia.
         </p>
