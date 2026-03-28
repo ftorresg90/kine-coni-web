@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
+import Link from 'next/link'
 
 export default async function AdminDashboard() {
   const supabase = await createClient()
@@ -53,11 +54,11 @@ export default async function AdminDashboard() {
             { href: '/admin/servicios', label: 'Editar servicios', desc: 'Modifica las áreas de atención' },
             { href: '/admin/perfil', label: 'Mi perfil', desc: 'Actualiza tu información personal' },
           ].map((link, i) => (
-            <a key={i} href={link.href}
+            <Link key={i} href={link.href}
               className="block p-4 rounded-xl border border-rosado/15 hover:bg-nude/50 transition-colors group">
               <p className="font-sans font-bold text-vino text-sm group-hover:text-rosado transition-colors">{link.label}</p>
               <p className="font-sans text-xs text-vino/50 mt-1">{link.desc}</p>
-            </a>
+            </Link>
           ))}
         </div>
       </div>

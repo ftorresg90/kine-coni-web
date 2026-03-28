@@ -28,17 +28,18 @@ export default function ResenasPage() {
   const handleSave = async (review) => {
     setSaving(true)
     if (review.id) {
-      await supabase.from('reviews').update({
+      const { error } = await supabase.from('reviews').update({
         author_name: review.author_name,
         author_subtitle: review.author_subtitle,
         content: review.content,
         rating: review.rating,
         is_active: review.is_active,
       }).eq('id', review.id)
+      if (error) { showToast('Error al guardar'); setSaving(false); return }
       showToast('Reseña actualizada ✓')
     } else {
       const maxOrder = Math.max(0, ...reviews.map(r => r.sort_order))
-      await supabase.from('reviews').insert({
+      const { error } = await supabase.from('reviews').insert({
         author_name: review.author_name,
         author_subtitle: review.author_subtitle,
         content: review.content,
@@ -46,6 +47,7 @@ export default function ResenasPage() {
         is_active: true,
         sort_order: maxOrder + 1,
       })
+      if (error) { showToast('Error al guardar'); setSaving(false); return }
       showToast('Reseña creada ✓')
     }
     setSaving(false)
@@ -56,14 +58,16 @@ export default function ResenasPage() {
 
   const confirmDelete = async () => {
     if (!deleteId) return
-    await supabase.from('reviews').delete().eq('id', deleteId)
+    const { error } = await supabase.from('reviews').delete().eq('id', deleteId)
+    if (error) { showToast('Error al eliminar'); setDeleteId(null); return }
     showToast('Reseña eliminada ✓')
     setDeleteId(null)
     loadReviews()
   }
 
   const toggleActive = async (review) => {
-    await supabase.from('reviews').update({ is_active: !review.is_active }).eq('id', review.id)
+    const { error } = await supabase.from('reviews').update({ is_active: !review.is_active }).eq('id', review.id)
+    if (error) { showToast('Error al cambiar estado'); return }
     loadReviews()
   }
 

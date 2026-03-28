@@ -18,7 +18,10 @@ body {
   color: #5D2A33;
 }
 
-h1, h2, h3, .font-serif {
+h1,
+h2,
+h3,
+.font-serif {
   font-family: 'Playfair Display', Georgia, serif;
 }
 
@@ -27,10 +30,23 @@ html {
   scroll-behavior: smooth;
 }
 
-@media (min-width: 1024px) {
-  html {
-    font-size: 18px;
-  }
+/* ── Modal animations ── */
+@keyframes modal-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modal-slide-up {
+  from { opacity: 0; transform: translateY(20px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal-backdrop {
+  animation: modal-fade-in 0.2s ease-out;
+}
+
+.modal-content {
+  animation: modal-slide-up 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ── Navbar blur al scroll ── */
@@ -71,11 +87,44 @@ html {
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ── Input focus ── */
+/* ── Focus styles: visible for keyboard, subtle for mouse ── */
 .form-input:focus {
   outline: none;
   border-color: #C9848F;
   box-shadow: 0 0 0 3px rgba(201, 132, 143, 0.25);
+}
+
+/* ── Global focus-visible ring for keyboard navigation ── */
+a:focus-visible,
+button:focus-visible,
+select:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid #C9848F;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Skip-to-content link ── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 100;
+  padding: 12px 24px;
+  background: #5D2A33;
+  color: #F5E6E8;
+  font-family: 'Lato', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  border-radius: 0 0 12px 12px;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 0;
 }
 
 /* ── Fade-up al entrar en viewport ── */
@@ -90,6 +139,33 @@ html {
   transform: translateY(0);
 }
 
+/* ── Reduced motion: respect user preference ── */
+@media (prefers-reduced-motion: reduce) {
+  .fade-up {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .service-card,
+  .step-card,
+  #wa-btn,
+  .review-track,
+  .faq-answer,
+  .faq-icon,
+  .admin-sidebar,
+  .toast,
+  .modal-backdrop,
+  .modal-content {
+    transition: none;
+    animation: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 /* ── WhatsApp botón: pulso periódico ── */
 #wa-btn {
   transition: transform 0.2s, box-shadow 0.2s;
@@ -101,9 +177,17 @@ html {
 }
 
 @keyframes wa-ping {
-  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.55); }
-  70% { box-shadow: 0 0 0 14px rgba(37, 211, 102, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.55);
+  }
+
+  70% {
+    box-shadow: 0 0 0 14px rgba(37, 211, 102, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
 }
 
 #wa-btn {
@@ -147,6 +231,7 @@ html {
   .admin-sidebar {
     transform: translateX(-100%);
   }
+
   .admin-sidebar.open {
     transform: translateX(0);
   }
@@ -158,11 +243,25 @@ html {
 }
 
 @keyframes toast-in {
-  from { transform: translateY(100%); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @keyframes toast-out {
-  from { transform: translateY(0); opacity: 1; }
-  to { transform: translateY(100%); opacity: 0; }
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
 }

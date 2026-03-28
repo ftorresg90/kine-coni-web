@@ -28,20 +28,22 @@ export default function FaqPage() {
   const handleSave = async (faq) => {
     setSaving(true)
     if (faq.id) {
-      await supabase.from('faqs').update({
+      const { error } = await supabase.from('faqs').update({
         question: faq.question,
         answer: faq.answer,
         is_active: faq.is_active,
       }).eq('id', faq.id)
+      if (error) { showToast('Error al guardar'); setSaving(false); return }
       showToast('Pregunta actualizada ✓')
     } else {
       const maxOrder = Math.max(0, ...faqs.map(f => f.sort_order))
-      await supabase.from('faqs').insert({
+      const { error } = await supabase.from('faqs').insert({
         question: faq.question,
         answer: faq.answer,
         is_active: true,
         sort_order: maxOrder + 1,
       })
+      if (error) { showToast('Error al guardar'); setSaving(false); return }
       showToast('Pregunta creada ✓')
     }
     setSaving(false)
@@ -52,14 +54,16 @@ export default function FaqPage() {
 
   const confirmDelete = async () => {
     if (!deleteId) return
-    await supabase.from('faqs').delete().eq('id', deleteId)
+    const { error } = await supabase.from('faqs').delete().eq('id', deleteId)
+    if (error) { showToast('Error al eliminar'); setDeleteId(null); return }
     showToast('Pregunta eliminada ✓')
     setDeleteId(null)
     loadFaqs()
   }
 
   const toggleActive = async (faq) => {
-    await supabase.from('faqs').update({ is_active: !faq.is_active }).eq('id', faq.id)
+    const { error } = await supabase.from('faqs').update({ is_active: !faq.is_active }).eq('id', faq.id)
+    if (error) { showToast('Error al cambiar estado'); return }
     loadFaqs()
   }
 
@@ -69,10 +73,11 @@ export default function FaqPage() {
     if (swapIndex < 0 || swapIndex >= faqs.length) return
 
     const swapFaq = faqs[swapIndex]
-    await Promise.all([
+    const results = await Promise.all([
       supabase.from('faqs').update({ sort_order: swapFaq.sort_order }).eq('id', faq.id),
       supabase.from('faqs').update({ sort_order: faq.sort_order }).eq('id', swapFaq.id),
     ])
+    if (results.some(r => r.error)) { showToast('Error al reordenar'); return }
     loadFaqs()
   }
 

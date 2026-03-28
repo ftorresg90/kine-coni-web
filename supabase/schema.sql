@@ -20,21 +20,23 @@ CREATE TABLE IF NOT EXISTS reviews (
   id SERIAL PRIMARY KEY,
   author_name TEXT NOT NULL,
   author_subtitle TEXT,
-  content TEXT NOT NULL,
+  content TEXT NOT NULL CHECK (char_length(content) <= 2000),
   rating INT DEFAULT 5 CHECK (rating >= 1 AND rating <= 5),
   is_active BOOLEAN DEFAULT true,
   sort_order INT DEFAULT 0,
-  created_at TIMESTAMPTZ DEFAULT now()
+  created_at TIMESTAMPTZ DEFAULT now(),
+  updated_at TIMESTAMPTZ DEFAULT now()
 );
 
 -- FAQ
 CREATE TABLE IF NOT EXISTS faqs (
   id SERIAL PRIMARY KEY,
-  question TEXT NOT NULL,
-  answer TEXT NOT NULL,
+  question TEXT NOT NULL CHECK (char_length(question) <= 500),
+  answer TEXT NOT NULL CHECK (char_length(answer) <= 5000),
   is_active BOOLEAN DEFAULT true,
   sort_order INT DEFAULT 0,
-  created_at TIMESTAMPTZ DEFAULT now()
+  created_at TIMESTAMPTZ DEFAULT now(),
+  updated_at TIMESTAMPTZ DEFAULT now()
 );
 
 -- Perfil (single-row table)
@@ -43,8 +45,8 @@ CREATE TABLE IF NOT EXISTS profile (
   about_text_1 TEXT,
   about_text_2 TEXT,
   phone TEXT,
-  email TEXT,
-  whatsapp_number TEXT,
+  email TEXT CHECK (email IS NULL OR email ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'),
+  whatsapp_number TEXT CHECK (whatsapp_number IS NULL OR whatsapp_number ~ '^\d{8,15}$'),
   instagram_url TEXT,
   hero_image_url TEXT DEFAULT '/foto-coni.jpg',
   profile_image_url TEXT DEFAULT '/foto-coni.jpg',
@@ -61,15 +63,61 @@ CREATE TABLE IF NOT EXISTS profile (
 -- Solicitudes de reserva
 CREATE TABLE IF NOT EXISTS bookings (
   id SERIAL PRIMARY KEY,
-  name TEXT NOT NULL,
-  phone TEXT NOT NULL,
+  name TEXT NOT NULL CHECK (char_length(name) BETWEEN 2 AND 200),
+  phone TEXT NOT NULL CHECK (char_length(phone) BETWEEN 7 AND 20),
   service TEXT NOT NULL,
   preferred_date DATE,
-  preferred_time TEXT,
-  message TEXT,
-  status TEXT DEFAULT 'pendiente',
+  preferred_time TEXT CHECK (preferred_time IS NULL OR preferred_time IN ('mañana', 'mediodia', 'tarde')),
+  message TEXT CHECK (message IS NULL OR char_length(message) <= 2000),
+  status TEXT NOT NULL DEFAULT 'pendiente'
+    CHECK (status IN ('pendiente', 'contactado', 'completado', 'cancelado')),
   created_at TIMESTAMPTZ DEFAULT now()
 );
+
+-- ============================================
+-- Indexes for query performance
+-- ============================================
+
+-- Services: ordered by sort_order on every public + admin load
+CREATE INDEX IF NOT EXISTS idx_services_sort_order ON services (sort_order);
+
+-- Reviews: filtered by is_active, ordered by sort_order on public page
+CREATE INDEX IF NOT EXISTS idx_reviews_active_sort ON reviews (is_active, sort_order);
+
+-- FAQs: filtered by is_active, ordered by sort_order on public page
+CREATE INDEX IF NOT EXISTS idx_faqs_active_sort ON faqs (is_active, sort_order);
+
+-- Bookings: filtered by status in admin, ordered by created_at desc
+CREATE INDEX IF NOT EXISTS idx_bookings_status ON bookings (status);
+CREATE INDEX IF NOT EXISTS idx_bookings_created_at ON bookings (created_at DESC);
+
+-- ============================================
+-- Auto-update updated_at trigger
+-- ============================================
+
+CREATE OR REPLACE FUNCTION update_updated_at_column()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.updated_at = now();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE TRIGGER set_updated_at_services
+  BEFORE UPDATE ON services FOR EACH ROW
+  EXECUTE FUNCTION update_updated_at_column();
+
+CREATE OR REPLACE TRIGGER set_updated_at_reviews
+  BEFORE UPDATE ON reviews FOR EACH ROW
+  EXECUTE FUNCTION update_updated_at_column();
+
+CREATE OR REPLACE TRIGGER set_updated_at_faqs
+  BEFORE UPDATE ON faqs FOR EACH ROW
+  EXECUTE FUNCTION update_updated_at_column();
+
+CREATE OR REPLACE TRIGGER set_updated_at_profile
+  BEFORE UPDATE ON profile FOR EACH ROW
+  EXECUTE FUNCTION update_updated_at_column();
 
 -- ============================================
 -- Row Level Security (RLS)
@@ -87,15 +135,42 @@ CREATE POLICY "Public can read active reviews" ON reviews FOR SELECT USING (is_a
 CREATE POLICY "Public can read active faqs" ON faqs FOR SELECT USING (is_active = true);
 CREATE POLICY "Public can read profile" ON profile FOR SELECT USING (true);
 
--- Public can insert bookings (contact form)
-CREATE POLICY "Public can insert bookings" ON bookings FOR INSERT WITH CHECK (true);
+-- Public can insert bookings (contact form) - only allowed fields
+CREATE POLICY "Public can insert bookings" ON bookings FOR INSERT
+  WITH CHECK (status = 'pendiente');
 
 -- Authenticated users (admin) can do everything
-CREATE POLICY "Admin full access services" ON services FOR ALL USING (auth.role() = 'authenticated');
-CREATE POLICY "Admin full access reviews" ON reviews FOR ALL USING (auth.role() = 'authenticated');
-CREATE POLICY "Admin full access faqs" ON faqs FOR ALL USING (auth.role() = 'authenticated');
-CREATE POLICY "Admin full access profile" ON profile FOR ALL USING (auth.role() = 'authenticated');
-CREATE POLICY "Admin full access bookings" ON bookings FOR ALL USING (auth.role() = 'authenticated');
+-- WITH CHECK is required for INSERT/UPDATE operations alongside USING for SELECT/DELETE
+CREATE POLICY "Admin full access services" ON services FOR ALL
+  USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated');
+CREATE POLICY "Admin full access reviews" ON reviews FOR ALL
+  USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated');
+CREATE POLICY "Admin full access faqs" ON faqs FOR ALL
+  USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated');
+CREATE POLICY "Admin full access profile" ON profile FOR ALL
+  USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated');
+CREATE POLICY "Admin full access bookings" ON bookings FOR ALL
+  USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated');
+
+-- ============================================
+-- Force status='pendiente' on public booking inserts
+-- Prevents anonymous users from injecting a different status
+-- ============================================
+
+CREATE OR REPLACE FUNCTION enforce_booking_defaults()
+RETURNS TRIGGER AS $$
+BEGIN
+  -- If the inserting user is not authenticated, force defaults
+  IF auth.role() != 'authenticated' THEN
+    NEW.status := 'pendiente';
+  END IF;
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE TRIGGER enforce_booking_defaults_trigger
+  BEFORE INSERT ON bookings FOR EACH ROW
+  EXECUTE FUNCTION enforce_booking_defaults();
 
 -- ============================================
 -- Seed data (from existing index.html)

@@ -2,7 +2,16 @@
   "permissions": {
     "allow": [
       "Bash(sips:*)",
-      "Bash(python3 -c \"from PIL import Image; print\\(''ok''\\)\")"
+      "Bash(python3 -c \"from PIL import Image; print\\(''ok''\\)\")",
+      "Bash(npx claude-code-templates@latest --agent development-team/frontend-developer)",
+      "Bash(npx claude-code-templates@latest --agent development-tools/code-reviewer)",
+      "Bash(npx claude-code-templates@latest --agent development-team/ui-ux-designer)",
+      "Bash(npx claude-code-templates@latest --agent development-team/backend-architect)",
+      "Bash(npx claude-code-templates@latest --agent ai-specialists/prompt-engineer)",
+      "Bash(npx claude-code-templates@latest --agent database/database-architect)",
+      "Bash(npx claude-code-templates@latest --agent expert-advisors/architect-review)",
+      "Bash(npx claude-code-templates@latest --agent development-tools/test-engineer)",
+      "Bash(npx claude-code-templates@latest --agent development-team/devops-engineer)"
     ]
   }
 }

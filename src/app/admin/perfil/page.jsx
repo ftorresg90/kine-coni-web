@@ -34,7 +34,6 @@ export default function PerfilPage() {
       hero_image_url: profile.hero_image_url,
       profile_image_url: profile.profile_image_url,
       coverage_zones: profile.coverage_zones,
-      updated_at: new Date().toISOString(),
     }).eq('id', 1)
 
     if (!error) showToast('Perfil actualizado ✓')

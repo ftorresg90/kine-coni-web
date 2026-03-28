@@ -30,7 +30,7 @@ export default function AdminLayout({ children }) {
     <div className="min-h-screen bg-nude/50 flex">
       {/* Overlay */}
       {sidebarOpen && (
-        <div className="fixed inset-0 bg-black/30 z-40 md:hidden" onClick={() => setSidebarOpen(false)} />
+        <div className="fixed inset-0 bg-black/30 z-40 md:hidden" onClick={() => setSidebarOpen(false)} aria-hidden="true" />
       )}
 
       {/* Sidebar */}
@@ -47,12 +47,13 @@ export default function AdminLayout({ children }) {
           </div>
         </div>
 
-        <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
+        <nav className="flex-1 p-4 space-y-1 overflow-y-auto" aria-label="Menú de administración">
           {navItems.map((item) => {
             const isActive = pathname === item.href
             return (
               <Link key={item.href} href={item.href}
                 onClick={() => setSidebarOpen(false)}
+                aria-current={isActive ? 'page' : undefined}
                 className={`flex items-center gap-3 px-4 py-3 rounded-xl font-sans text-sm transition-colors
                   ${isActive ? 'bg-nude/15 text-nude font-bold' : 'text-nude/70 hover:bg-nude/10 hover:text-nude'}`}>
                 <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -65,7 +66,7 @@ export default function AdminLayout({ children }) {
         </nav>
 
         <div className="p-4 border-t border-nude/10">
-          <a href="/" target="_blank"
+          <a href="/" target="_blank" rel="noopener noreferrer"
             className="flex items-center gap-3 px-4 py-2.5 rounded-xl font-sans text-xs text-nude/50 hover:text-nude hover:bg-nude/10 transition-colors mb-1">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -87,8 +88,9 @@ export default function AdminLayout({ children }) {
         {/* Top bar (mobile) */}
         <header className="md:hidden bg-white/70 border-b border-rosado/20 px-4 py-3 flex items-center justify-between sticky top-0 z-30">
           <button onClick={() => setSidebarOpen(true)}
+            aria-label="Abrir menú de administración"
             className="p-2 rounded-lg hover:bg-nude-dark transition-colors">
-            <svg className="w-6 h-6 text-vino" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-6 h-6 text-vino" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>

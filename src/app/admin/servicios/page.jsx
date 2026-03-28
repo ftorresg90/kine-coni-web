@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
+import SafeSvg from '@/components/SafeSvg'
 
 export default function ServiciosPage() {
   const [services, setServices] = useState([])
@@ -34,14 +35,16 @@ export default function ServiciosPage() {
       description: service.description,
       items: service.items,
       icon_svg: service.icon_svg,
-      updated_at: new Date().toISOString(),
     }).eq('id', service.id)
 
-    if (!error) {
-      showToast('Servicio actualizado ✓')
-      setEditing(null)
-      loadServices()
+    if (error) {
+      showToast('Error al guardar')
+      setSaving(false)
+      return
     }
+    showToast('Servicio actualizado ✓')
+    setEditing(null)
+    loadServices()
     setSaving(false)
   }
 
@@ -69,7 +72,7 @@ export default function ServiciosPage() {
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 rounded-xl bg-rosado/15 flex items-center justify-center flex-shrink-0">
-                      <div className="text-rosado" dangerouslySetInnerHTML={{ __html: service.icon_svg }} />
+                      <SafeSvg html={service.icon_svg} className="text-rosado" />
                     </div>
                     <div>
                       <h3 className="font-serif text-lg text-vino">{service.title}</h3>

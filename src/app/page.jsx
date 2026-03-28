@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
+import Image from 'next/image'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -9,6 +10,7 @@ import FaqAccordion from '@/components/FaqAccordion'
 import BookingForm from '@/components/BookingForm'
 import WhatsAppButton from '@/components/WhatsAppButton'
 import FadeUpObserver from '@/components/FadeUpObserver'
+import SafeSvg from '@/components/SafeSvg'
 
 async function getData() {
   const supabase = await createClient()
@@ -44,6 +46,7 @@ export default async function HomePage() {
       <Navbar profile={profile} />
       <FadeUpObserver />
 
+      <main>
       {/* ═══ HERO ═══ */}
       <section id="inicio" className="min-h-screen flex items-center pt-24 pb-16 px-6 md:px-12">
         <div className="max-w-6xl mx-auto w-full grid md:grid-cols-2 gap-12 items-center">
@@ -84,12 +87,15 @@ export default async function HomePage() {
             <div className="relative">
               <div className="absolute -top-4 -left-4 w-full h-full rounded-3xl bg-rosado/20 -z-10" />
               <div className="absolute -bottom-4 -right-4 w-full h-full rounded-3xl bg-vino/10 -z-10" />
-              <div className="w-72 h-80 md:w-80 md:h-96 rounded-3xl overflow-hidden shadow-2xl bg-nude-dark">
-                <img
+              <div className="relative w-72 h-80 md:w-80 md:h-96 rounded-3xl overflow-hidden shadow-2xl bg-nude-dark">
+                <Image
                   src={profile.hero_image_url || '/foto-coni.jpg'}
-                  alt="Kinesióloga Constanza Anjarí"
-                  loading="eager"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: '50% 15%' }}
+                  alt="Kinesióloga Constanza Anjarí atendiendo a domicilio en Viña del Mar"
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 288px, 320px"
+                  className="object-cover"
+                  style={{ objectPosition: '50% 15%' }}
                 />
               </div>
             </div>
@@ -136,7 +142,7 @@ export default async function HomePage() {
                   </svg>
                 </div>
                 <h3 className={`font-serif ${card.dark ? 'text-nude' : 'text-vino'} text-base mb-2`}>{card.title}</h3>
-                <p className={`font-sans text-xs ${card.dark ? 'text-nude/70' : 'text-vino/60'} leading-relaxed`}>{card.desc}</p>
+                <p className={`font-sans text-xs ${card.dark ? 'text-nude/80' : 'text-vino/70'} leading-relaxed`}>{card.desc}</p>
               </div>
             ))}
           </div>
@@ -160,7 +166,7 @@ export default async function HomePage() {
                 className="service-card fade-up bg-nude rounded-3xl p-7 shadow-sm border border-rosado/20"
                 style={{ transitionDelay: `${i * 0.08}s` }}>
                 <div className="w-14 h-14 rounded-2xl bg-rosado/15 flex items-center justify-center mb-5">
-                  <div className="text-rosado" dangerouslySetInnerHTML={{ __html: service.icon_svg }} />
+                  <SafeSvg html={service.icon_svg} className="text-rosado" />
                 </div>
                 <h3 className="font-serif text-lg text-vino mb-3">{service.title}</h3>
                 <ul className="font-sans text-sm text-vino/70 space-y-1.5">
@@ -262,7 +268,7 @@ export default async function HomePage() {
                     <span className="text-rosado text-xl">📍</span>
                     <div>
                       <p className="font-sans font-bold text-vino text-sm">{zone.name}</p>
-                      <p className="font-sans text-xs text-vino/50">{zone.detail}</p>
+                      <p className="font-sans text-xs text-vino/70">{zone.detail}</p>
                     </div>
                   </div>
                 ))}
@@ -271,7 +277,7 @@ export default async function HomePage() {
                     <span className="text-rosado text-xl">📍</span>
                     <div>
                       <p className="font-sans font-bold text-vino text-sm">{zones[4].name}</p>
-                      <p className="font-sans text-xs text-vino/50">{zones[4].detail}</p>
+                      <p className="font-sans text-xs text-vino/70">{zones[4].detail}</p>
                     </div>
                   </div>
                 )}
@@ -290,16 +296,17 @@ export default async function HomePage() {
               Completa el formulario y me pondré en contacto contigo a la brevedad para confirmar tu cita.
             </p>
           </div>
-          <BookingForm />
+          <BookingForm whatsappNumber={profile.whatsapp_number || '56982927833'} />
         </div>
       </section>
+      </main>
 
       {/* ═══ FOOTER ═══ */}
       <footer id="contacto" className="bg-vino text-nude py-14 px-6 md:px-12">
         <div className="max-w-6xl mx-auto grid sm:grid-cols-3 gap-10">
           <div>
             <p className="font-serif text-2xl font-semibold mb-2">Constanza Anjarí</p>
-            <p className="font-sans text-xs text-nude/60 uppercase tracking-widest mb-4">Kinesióloga · U. Andrés Bello</p>
+            <p className="font-sans text-xs text-nude/70 uppercase tracking-widest mb-4">Kinesióloga · U. Andrés Bello</p>
             <p className="font-sans text-sm text-nude/70 leading-relaxed">
               Atención kinesiológica a domicilio con dedicación, calidez y respaldo profesional.
             </p>
@@ -347,8 +354,8 @@ export default async function HomePage() {
           </div>
         </div>
 
-        <div className="max-w-6xl mx-auto mt-10 pt-6 border-t border-nude/15 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs font-sans text-nude/40">
-          <p>© 2025 Constanza Anjarí · Kinesióloga. Todos los derechos reservados.</p>
+        <div className="max-w-6xl mx-auto mt-10 pt-6 border-t border-nude/15 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs font-sans text-nude/60">
+          <p>&copy; {new Date().getFullYear()} Constanza Anjarí &middot; Kinesióloga. Todos los derechos reservados.</p>
           <p>Hecho con cuidado en Viña del Mar, Chile 🌊</p>
         </div>
       </footer>

@@ -38,14 +38,16 @@ export default function ReservasPage() {
   const showToast = (msg) => { setToast(msg); setTimeout(() => setToast(''), 3000) }
 
   const updateStatus = async (id, status) => {
-    await supabase.from('bookings').update({ status }).eq('id', id)
+    const { error } = await supabase.from('bookings').update({ status }).eq('id', id)
+    if (error) { showToast('Error al actualizar estado'); return }
     showToast(`Estado actualizado a: ${statusLabels[status]}`)
     loadBookings()
   }
 
   const confirmDelete = async () => {
     if (!deleteId) return
-    await supabase.from('bookings').delete().eq('id', deleteId)
+    const { error } = await supabase.from('bookings').delete().eq('id', deleteId)
+    if (error) { showToast('Error al eliminar'); setDeleteId(null); return }
     showToast('Reserva eliminada ✓')
     setDeleteId(null)
     loadBookings()

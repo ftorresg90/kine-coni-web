@@ -17,9 +17,9 @@ export default function LoginPage() {
     setError('')
 
     const supabase = createClient()
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
+    const { error: authError } = await supabase.auth.signInWithPassword({ email, password })
 
-    if (error) {
+    if (authError) {
       setError('Credenciales incorrectas. Verifica tu email y contraseña.')
       setLoading(false)
       return
@@ -44,7 +44,7 @@ export default function LoginPage() {
           className="bg-white/70 rounded-3xl p-8 shadow-lg border border-rosado/20 space-y-5">
 
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm font-sans">
+            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm font-sans" role="alert">
               {error}
             </div>
           )}
