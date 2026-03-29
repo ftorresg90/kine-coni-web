@@ -77,8 +77,7 @@ function groupByDay(appointments, weekDays) {
 export default function WeekCalendar({ weekStart, appointments, onCellClick, onAppointmentClick }) {
   const [isMobile, setIsMobile] = useState(false)
   
-  // Calculate default day index
-  const weekDays = useMemo(() => buildWeekDays(weekStart), [weekStart])
+  const weekDays = useMemo(() => buildWeekDays(weekStart), [weekStart.getTime()])
   const byDay = useMemo(() => groupByDay(appointments, weekDays), [appointments, weekDays])
   
   const [selectedDayIndex, setSelectedDayIndex] = useState(() => {
@@ -88,7 +87,7 @@ export default function WeekCalendar({ weekStart, appointments, onCellClick, onA
 
   // Derive state during render when weekStart changes (React recommended approach)
   const [prevWeekStart, setPrevWeekStart] = useState(weekStart)
-  if (weekStart !== prevWeekStart) {
+  if (weekStart.getTime() !== prevWeekStart.getTime()) {
     setPrevWeekStart(weekStart)
     const todayIdx = weekDays.findIndex(isToday)
     setSelectedDayIndex(todayIdx >= 0 ? todayIdx : 0)
