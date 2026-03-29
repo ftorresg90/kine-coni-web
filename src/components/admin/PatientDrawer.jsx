@@ -153,7 +153,7 @@ export default function PatientDrawer({ patient, onClose, onRefresh }) {
               { label: 'RUT', value: patient.rut },
               { label: 'Telefono', value: patient.phone },
               { label: 'Email', value: patient.email },
-              { label: 'Genero', value: patient.gender },
+              { label: 'Genero', value: patient.gender ? patient.gender.charAt(0).toUpperCase() + patient.gender.slice(1) : patient.gender },
               {
                 label: 'Fecha de nacimiento',
                 value: patient.birth_date

@@ -23,7 +23,8 @@
       "mcp__7376eae1-91d6-4685-90fb-320d0f56be5f__apply_migration",
       "mcp__7376eae1-91d6-4685-90fb-320d0f56be5f__list_migrations",
       "mcp__7376eae1-91d6-4685-90fb-320d0f56be5f__execute_sql",
-      "mcp__7376eae1-91d6-4685-90fb-320d0f56be5f__list_tables"
+      "mcp__7376eae1-91d6-4685-90fb-320d0f56be5f__list_tables",
+      "Bash(gh run:*)"
     ]
   }
 }

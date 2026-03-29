@@ -1,5 +1,7 @@
 'use client'
 
+export const dynamic = 'force-dynamic'
+
 import { useState, useEffect, useCallback, useMemo } from 'react'
 import PatientDrawer from '@/components/admin/PatientDrawer'
 
@@ -28,7 +30,7 @@ function formatRelativeDate(iso) {
   return d.toLocaleDateString('es-CL', { day: 'numeric', month: 'short' })
 }
 
-const GENDER_LABELS = { M: 'Masculino', F: 'Femenino', O: 'Otro' }
+const GENDER_LABELS = { masculino: 'Masculino', femenino: 'Femenino', otro: 'Otro' }
 
 const PATIENT_FIELDS = [
   { name: 'full_name', label: 'Nombre completo', type: 'text', required: true, placeholder: 'Ej: Maria Gonzalez' },
@@ -39,7 +41,26 @@ const PATIENT_FIELDS = [
   { name: 'diagnosis', label: 'Diagnostico', type: 'text', required: false, placeholder: 'Ej: Lumbalgia cronica' },
 ]
 
-function NewPatientModal({ onClose, onCreated }) {
+function normaliseRut(raw) {
+  const cleaned = raw.replace(/\./g, '').replace(/\s/g, '').toUpperCase()
+  if (!/^\d{7,8}-?[\dK]$/.test(cleaned)) return null
+  const [body, dv] = cleaned.includes('-') ? cleaned.split('-') : [cleaned.slice(0, -1), cleaned.slice(-1)]
+  const sum = body.split('').reverse().reduce((acc, d, i) => acc + parseInt(d, 10) * [2, 3, 4, 5, 6, 7, 2, 3][i], 0)
+  const remainder = 11 - (sum % 11)
+  const expected = remainder === 11 ? '0' : remainder === 10 ? 'K' : String(remainder)
+  if (dv !== expected) return null
+  return `${body}-${dv}`
+}
+
+function validateEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+}
+
+function validatePhone(phone) {
+  return /^\+?[0-9\s-]{7,20}$/.test(phone)
+}
+
+function NewPatientModal({ onClose, onCreated, onError }) {
   const [form, setForm] = useState({ full_name: '', rut: '', phone: '', email: '', birth_date: '', gender: '', diagnosis: '' })
   const [saving, setSaving] = useState(false)
 
@@ -47,6 +68,20 @@ function NewPatientModal({ onClose, onCreated }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    if (form.rut && !normaliseRut(form.rut)) {
+      onError?.('El RUT ingresado no es válido.')
+      return
+    }
+    if (form.email && !validateEmail(form.email)) {
+      onError?.('El email ingresado no es válido.')
+      return
+    }
+    if (form.phone && !validatePhone(form.phone)) {
+      onError?.('El teléfono ingresado no es válido.')
+      return
+    }
+
     setSaving(true)
     try {
       const body = Object.fromEntries(
@@ -59,14 +94,14 @@ function NewPatientModal({ onClose, onCreated }) {
       })
       if (!res.ok) {
         const err = await res.json().catch(() => ({}))
-        window.alert(err.error ?? 'Error al crear el paciente.')
+        onError?.(err.error ?? 'Error al crear el paciente.')
         setSaving(false)
         return
       }
       const json = await res.json()
       onCreated?.(json.data)
     } catch {
-      window.alert('Error de red al crear el paciente.')
+      onError?.('Error de red al crear el paciente.')
       setSaving(false)
     }
   }
@@ -119,9 +154,9 @@ function NewPatientModal({ onClose, onCreated }) {
               className="form-input w-full bg-white border border-rosado/30 rounded-xl px-4 py-2.5 font-sans text-sm text-vino"
             >
               <option value="">Seleccionar...</option>
-              <option value="F">Femenino</option>
-              <option value="M">Masculino</option>
-              <option value="O">Otro</option>
+              <option value="femenino">Femenino</option>
+              <option value="masculino">Masculino</option>
+              <option value="otro">Otro</option>
             </select>
           </div>
 
@@ -154,11 +189,11 @@ export default function PacientesPage() {
   const [query, setQuery] = useState('')
   const [selectedPatient, setSelectedPatient] = useState(null)
   const [showNewModal, setShowNewModal] = useState(false)
-  const [toast, setToast] = useState('')
+  const [toast, setToast] = useState(null)
 
-  const showToast = (msg) => {
-    setToast(msg)
-    setTimeout(() => setToast(''), 3500)
+  const showToast = (message, type = 'success') => {
+    setToast({ message, type })
+    setTimeout(() => setToast(null), 3500)
   }
 
   const loadPatients = useCallback(async () => {
@@ -375,17 +410,20 @@ export default function PacientesPage() {
         <NewPatientModal
           onClose={() => setShowNewModal(false)}
           onCreated={handlePatientCreated}
+          onError={(msg) => showToast(msg, 'error')}
         />
       )}
 
       {/* Toast */}
       {toast && (
         <div
-          className="toast fixed bottom-6 right-6 bg-vino text-nude px-6 py-3 rounded-full shadow-lg font-sans text-sm font-bold z-50"
+          className={`toast fixed bottom-6 right-6 px-6 py-3 rounded-full shadow-lg font-sans text-sm font-bold z-50 ${
+            toast.type === 'error' ? 'bg-rosado text-vino' : 'bg-vino text-nude'
+          }`}
           role="status"
           aria-live="polite"
         >
-          {toast}
+          {toast.message}
         </div>
       )}
     </div>
