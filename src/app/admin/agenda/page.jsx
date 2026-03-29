@@ -46,8 +46,14 @@ function AgendaPageInner() {
   const searchParams = useSearchParams()
 
   // Determine current week start from URL param or today
-  const weekStartParam = searchParams.get('semana')
-  const weekStart = weekStartParam ? getMonday(new Date(weekStartParam)) : getMonday(new Date())
+  let parsedDate
+  if (weekStartParam) {
+    const [y, m, d] = weekStartParam.split('-').map(Number)
+    parsedDate = new Date(y, m - 1, d)
+  } else {
+    parsedDate = new Date()
+  }
+  const weekStart = getMonday(parsedDate)
 
   const [appointments, setAppointments] = useState([])
   const [loading, setLoading] = useState(true)

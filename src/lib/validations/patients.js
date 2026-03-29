@@ -80,5 +80,5 @@ export const listPatientsSchema = z.object({
   rut:      z.string().trim().max(20).optional(),
   // Pagination
   page:     z.coerce.number().int().min(1).default(1),
-  pageSize: z.coerce.number().int().min(1).max(100).default(20),
+  pageSize: z.coerce.number().int().min(1).max(1000).default(20),
 })
