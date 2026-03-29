@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 
@@ -78,7 +79,7 @@ export default function LoginPage() {
         </form>
 
         <p className="text-center mt-6 font-sans text-xs text-vino/40">
-          <a href="/" className="hover:text-rosado transition-colors">← Volver al sitio</a>
+          <Link href="/" className="hover:text-rosado transition-colors">← Volver al sitio</Link>
         </p>
       </div>
     </div>

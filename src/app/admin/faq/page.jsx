@@ -15,13 +15,13 @@ export default function FaqPage() {
 
   const supabase = createClient()
 
-  useEffect(() => { loadFaqs() }, [])
-
   const loadFaqs = async () => {
     const { data } = await supabase.from('faqs').select('*').order('sort_order')
     setFaqs(data || [])
     setLoading(false)
   }
+
+  useEffect(() => { loadFaqs() }, [])
 
   const showToast = (msg) => { setToast(msg); setTimeout(() => setToast(''), 3000) }
 

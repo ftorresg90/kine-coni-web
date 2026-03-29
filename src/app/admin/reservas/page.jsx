@@ -27,13 +27,13 @@ export default function ReservasPage() {
 
   const supabase = createClient()
 
-  useEffect(() => { loadBookings() }, [])
-
   const loadBookings = async () => {
     const { data } = await supabase.from('bookings').select('*').order('created_at', { ascending: false })
     setBookings(data || [])
     setLoading(false)
   }
+
+  useEffect(() => { loadBookings() }, [])
 
   const showToast = (msg) => { setToast(msg); setTimeout(() => setToast(''), 3000) }
 

@@ -274,7 +274,7 @@ export default function PacientesPage() {
       {/* Results count */}
       {query && (
         <p className="font-sans text-xs text-vino/50 mb-3" aria-live="polite">
-          {filtered.length} resultado{filtered.length !== 1 ? 's' : ''} para "{query}"
+          {`${filtered.length} resultado${filtered.length !== 1 ? 's' : ''} para "${query}"`}
         </p>
       )}
 

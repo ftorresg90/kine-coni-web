@@ -15,13 +15,13 @@ export default function ResenasPage() {
 
   const supabase = createClient()
 
-  useEffect(() => { loadReviews() }, [])
-
   const loadReviews = async () => {
     const { data } = await supabase.from('reviews').select('*').order('sort_order')
     setReviews(data || [])
     setLoading(false)
   }
+
+  useEffect(() => { loadReviews() }, [])
 
   const showToast = (msg) => { setToast(msg); setTimeout(() => setToast(''), 3000) }
 

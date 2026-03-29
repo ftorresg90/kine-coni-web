@@ -4,20 +4,15 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 
 export default function ReviewCarousel({ reviews }) {
   const [current, setCurrent] = useState(0)
-  const [mounted, setMounted] = useState(false)
   const [paused, setPaused] = useState(false)
   const containerRef = useRef(null)
 
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
   const slidesVisible = useCallback(() => {
-    if (!mounted || typeof window === 'undefined') return 1
+    if (typeof window === 'undefined') return 1
     if (window.innerWidth >= 1024) return 3
     if (window.innerWidth >= 640) return 2
     return 1
-  }, [mounted])
+  }, [])
 
   const maxIndex = useCallback(() => {
     return Math.max(0, reviews.length - slidesVisible())

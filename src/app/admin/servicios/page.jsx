@@ -13,15 +13,15 @@ export default function ServiciosPage() {
 
   const supabase = createClient()
 
-  useEffect(() => {
-    loadServices()
-  }, [])
-
   const loadServices = async () => {
     const { data } = await supabase.from('services').select('*').order('sort_order')
     setServices(data || [])
     setLoading(false)
   }
+
+  useEffect(() => {
+    loadServices()
+  }, [])
 
   const showToast = (msg) => {
     setToast(msg)

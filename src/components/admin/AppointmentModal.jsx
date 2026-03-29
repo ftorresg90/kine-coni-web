@@ -69,13 +69,9 @@ export default function AppointmentModal({ mode, appointment, initialDate, initi
   const overlapTimer = useRef(null)
   const patientTimer = useRef(null)
 
-  // Patient autocomplete search
+  // Patient autocomplete search — never call setState synchronously in effect body
   useEffect(() => {
-    if (patientQuery.length < 2) {
-      setPatientSuggestions([])
-      setShowSuggestions(false)
-      return
-    }
+    if (patientQuery.length < 2) return
     clearTimeout(patientTimer.current)
     patientTimer.current = setTimeout(async () => {
       try {
@@ -231,7 +227,7 @@ export default function AppointmentModal({ mode, appointment, initialDate, initi
               autoComplete="off"
               className="form-input w-full bg-white border border-rosado/30 rounded-xl px-4 py-2.5 font-sans text-sm text-vino"
             />
-            {showSuggestions && patientSuggestions.length > 0 && (
+            {showSuggestions && patientQuery.length >= 2 && patientSuggestions.length > 0 && (
               <ul className="absolute z-10 mt-1 w-full bg-white border border-rosado/20 rounded-xl shadow-lg max-h-48 overflow-y-auto">
                 {patientSuggestions.map((p) => (
                   <li key={p.id}>
