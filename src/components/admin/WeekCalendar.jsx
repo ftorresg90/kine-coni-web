@@ -77,7 +77,8 @@ function groupByDay(appointments, weekDays) {
 export default function WeekCalendar({ weekStart, appointments, onCellClick, onAppointmentClick }) {
   const [isMobile, setIsMobile] = useState(false)
   
-  const weekDays = useMemo(() => buildWeekDays(weekStart), [weekStart.getTime()])
+  const weekStartTime = weekStart.getTime()
+  const weekDays = useMemo(() => buildWeekDays(weekStartTime), [weekStartTime])
   const byDay = useMemo(() => groupByDay(appointments, weekDays), [appointments, weekDays])
   
   const [selectedDayIndex, setSelectedDayIndex] = useState(() => {
