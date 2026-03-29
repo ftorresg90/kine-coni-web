@@ -11,7 +11,19 @@
       "Bash(npx claude-code-templates@latest --agent database/database-architect)",
       "Bash(npx claude-code-templates@latest --agent expert-advisors/architect-review)",
       "Bash(npx claude-code-templates@latest --agent development-tools/test-engineer)",
-      "Bash(npx claude-code-templates@latest --agent development-team/devops-engineer)"
+      "Bash(npx claude-code-templates@latest --agent development-team/devops-engineer)",
+      "Bash(npm run:*)",
+      "Bash(node -e \"require\\(''zod''\\); console.log\\(''zod resolvable''\\)\")",
+      "Bash(node --input-type=module:*)",
+      "Bash(node -e \"const p = require\\(''/Users/franciscotorres/Desktop/Proyectos Fran/kinesiologia-coni-web/package.json''\\); console.log\\(''type:'', p.type, ''| next:'', p.dependencies?.next\\)\")",
+      "Bash(npm install:*)",
+      "Bash(ls \"/Users/franciscotorres/Desktop/Proyectos Fran/kinesiologia-coni-web/next.config\"*)",
+      "Bash(node -e \"const p = require\\(''./package.json''\\); console.log\\(JSON.stringify\\(p.devDependencies, null, 2\\)\\)\")",
+      "mcp__7376eae1-91d6-4685-90fb-320d0f56be5f__list_projects",
+      "mcp__7376eae1-91d6-4685-90fb-320d0f56be5f__apply_migration",
+      "mcp__7376eae1-91d6-4685-90fb-320d0f56be5f__list_migrations",
+      "mcp__7376eae1-91d6-4685-90fb-320d0f56be5f__execute_sql",
+      "mcp__7376eae1-91d6-4685-90fb-320d0f56be5f__list_tables"
     ]
   }
 }

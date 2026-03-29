@@ -156,7 +156,8 @@ textarea:focus-visible,
   .admin-sidebar,
   .toast,
   .modal-backdrop,
-  .modal-content {
+  .modal-content,
+  aside[role="complementary"] {
     transition: none;
     animation: none;
   }
@@ -225,6 +226,16 @@ textarea:focus-visible,
 /* ── Admin Dashboard ── */
 .admin-sidebar {
   transition: transform 0.3s ease;
+}
+
+/* ── Patient drawer slide-in from right ── */
+@keyframes drawer-slide-in {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+aside[role="complementary"] {
+  animation: drawer-slide-in 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @media (max-width: 768px) {
