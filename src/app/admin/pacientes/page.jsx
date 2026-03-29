@@ -60,8 +60,8 @@ function validatePhone(phone) {
   return /^\+?[0-9\s-]{7,20}$/.test(phone)
 }
 
-function NewPatientModal({ onClose, onCreated, onError }) {
-  const [form, setForm] = useState({ full_name: '', rut: '', phone: '', email: '', birth_date: '', gender: '', diagnosis: '' })
+function PatientFormModal({ mode = 'create', initialData, onClose, onSaved, onError }) {
+  const [form, setForm] = useState(initialData ?? { full_name: '', rut: '', phone: '', email: '', birth_date: '', gender: '', diagnosis: '' })
   const [saving, setSaving] = useState(false)
 
   const handleChange = (field, value) => setForm((prev) => ({ ...prev, [field]: value }))
@@ -87,21 +87,23 @@ function NewPatientModal({ onClose, onCreated, onError }) {
       const body = Object.fromEntries(
         Object.entries(form).filter(([, v]) => v !== '' && v !== null)
       )
-      const res = await fetch('/api/admin/patients', {
-        method: 'POST',
+      
+      const isEdit = mode === 'edit'
+      const res = await fetch(isEdit ? `/api/admin/patients/${initialData.id}` : '/api/admin/patients', {
+        method: isEdit ? 'PUT' : 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       })
       if (!res.ok) {
         const err = await res.json().catch(() => ({}))
-        onError?.(err.error ?? 'Error al crear el paciente.')
+        onError?.(err.error ?? `Error al ${isEdit ? 'actualizar' : 'crear'} el paciente.`)
         setSaving(false)
         return
       }
       const json = await res.json()
-      onCreated?.(json.data)
+      onSaved?.(json.data)
     } catch {
-      onError?.('Error de red al crear el paciente.')
+      onError?.(`Error de red al ${mode === 'edit' ? 'actualizar' : 'crear'} el paciente.`)
       setSaving(false)
     }
   }
@@ -112,11 +114,13 @@ function NewPatientModal({ onClose, onCreated, onError }) {
       onClick={(e) => { if (e.target === e.currentTarget) onClose() }}
       role="dialog"
       aria-modal="true"
-      aria-label="Nuevo paciente"
+      aria-label={mode === 'create' ? 'Nuevo paciente' : 'Editar paciente'}
     >
       <div className="modal-content bg-white rounded-2xl shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between p-6 border-b border-nude-dark">
-          <h2 className="font-serif text-xl text-vino">Nuevo paciente</h2>
+          <h2 className="font-serif text-xl text-vino">
+            {mode === 'create' ? 'Nuevo paciente' : 'Editar paciente'}
+          </h2>
           <button
             onClick={onClose}
             aria-label="Cerrar modal"
@@ -137,7 +141,7 @@ function NewPatientModal({ onClose, onCreated, onError }) {
               </label>
               <input
                 type={f.type}
-                value={form[f.name]}
+                value={form[f.name] || ''}
                 onChange={(e) => handleChange(f.name, e.target.value)}
                 required={f.required}
                 placeholder={f.placeholder ?? ''}
@@ -149,7 +153,7 @@ function NewPatientModal({ onClose, onCreated, onError }) {
           <div>
             <label className="block font-sans text-sm font-bold text-vino mb-1.5">Genero</label>
             <select
-              value={form.gender}
+              value={form.gender || ''}
               onChange={(e) => handleChange('gender', e.target.value)}
               className="form-input w-full bg-white border border-rosado/30 rounded-xl px-4 py-2.5 font-sans text-sm text-vino"
             >
@@ -166,7 +170,7 @@ function NewPatientModal({ onClose, onCreated, onError }) {
               disabled={saving}
               className="flex-1 px-6 py-2.5 rounded-full bg-vino text-nude font-sans font-bold text-sm hover:bg-vino-light transition-colors disabled:opacity-50"
             >
-              {saving ? 'Guardando...' : 'Crear paciente'}
+              {saving ? 'Guardando...' : (mode === 'create' ? 'Crear paciente' : 'Guardar cambios')}
             </button>
             <button
               type="button"
@@ -188,7 +192,7 @@ export default function PacientesPage() {
   const [error, setError] = useState(null)
   const [query, setQuery] = useState('')
   const [selectedPatient, setSelectedPatient] = useState(null)
-  const [showNewModal, setShowNewModal] = useState(false)
+  const [formModal, setFormModal] = useState(null) // { mode, initialData? }
   const [toast, setToast] = useState(null)
 
   const showToast = (message, type = 'success') => {
@@ -228,11 +232,19 @@ export default function PacientesPage() {
     )
   }, [patients, query])
 
-  const handlePatientCreated = (patient) => {
-    setShowNewModal(false)
-    showToast('Paciente creado con exito.')
+  const handlePatientSaved = (patient) => {
+    const isEdit = formModal?.mode === 'edit'
+    setFormModal(null)
+    showToast(isEdit ? 'Paciente actualizado con éxito.' : 'Paciente creado con éxito.')
     loadPatients()
-    if (patient) setSelectedPatient(patient)
+    if (patient && !isEdit) setSelectedPatient(patient)
+    if (patient && isEdit && selectedPatient?.id === patient.id) {
+      setSelectedPatient(patient)
+    }
+  }
+
+  const handleEditPatient = (patient) => {
+    setFormModal({ mode: 'edit', initialData: patient })
   }
 
   if (loading) {
@@ -254,7 +266,7 @@ export default function PacientesPage() {
           </p>
         </div>
         <button
-          onClick={() => setShowNewModal(true)}
+          onClick={() => setFormModal({ mode: 'create' })}
           className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-vino text-nude font-sans font-bold text-sm hover:bg-vino-light transition-colors self-start sm:self-auto"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -324,7 +336,7 @@ export default function PacientesPage() {
           </p>
           {!query && (
             <button
-              onClick={() => setShowNewModal(true)}
+              onClick={() => setFormModal({ mode: 'create' })}
               className="mt-4 px-5 py-2.5 rounded-full bg-vino text-nude font-sans font-bold text-sm hover:bg-vino-light transition-colors"
             >
               Agregar primer paciente
@@ -402,14 +414,22 @@ export default function PacientesPage() {
           patient={selectedPatient}
           onClose={() => setSelectedPatient(null)}
           onRefresh={loadPatients}
+          onEdit={() => handleEditPatient(selectedPatient)}
+          onDeactivated={() => {
+            showToast('Paciente desactivado con éxito.')
+            setSelectedPatient(null)
+            loadPatients()
+          }}
         />
       )}
 
-      {/* New patient modal */}
-      {showNewModal && (
-        <NewPatientModal
-          onClose={() => setShowNewModal(false)}
-          onCreated={handlePatientCreated}
+      {/* Patient form modal */}
+      {formModal && (
+        <PatientFormModal
+          mode={formModal.mode}
+          initialData={formModal.initialData}
+          onClose={() => setFormModal(null)}
+          onSaved={handlePatientSaved}
           onError={(msg) => showToast(msg, 'error')}
         />
       )}
