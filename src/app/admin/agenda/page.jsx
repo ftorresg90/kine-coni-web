@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import WeekCalendar from '@/components/admin/WeekCalendar'
 import AppointmentModal from '@/components/admin/AppointmentModal'
@@ -39,7 +39,7 @@ function formatWeekLabel(monday) {
   return `${fromDay} de ${fromMonth} – ${toDay} de ${toMonth} ${year}`
 }
 
-export default function AgendaPage() {
+function AgendaPageInner() {
   const router = useRouter()
   const searchParams = useSearchParams()
 
@@ -258,5 +258,17 @@ export default function AgendaPage() {
         </div>
       )}
     </div>
+  )
+}
+
+export default function AgendaPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center h-64">
+        <div className="w-8 h-8 border-4 border-rosado/30 border-t-rosado rounded-full animate-spin" />
+      </div>
+    }>
+      <AgendaPageInner />
+    </Suspense>
   )
 }
