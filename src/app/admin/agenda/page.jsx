@@ -61,15 +61,6 @@ function AgendaPageInner() {
   const [error, setError] = useState(null)
   const [modal, setModal] = useState(null) // { mode: 'create' | 'edit', appointment?, initialDate? }
   const [toast, setToast] = useState('')
-  const [isMobile, setIsMobile] = useState(false)
-
-  useEffect(() => {
-    const mq = window.matchMedia('(max-width: 767px)')
-    setIsMobile(mq.matches)
-    const handler = (e) => setIsMobile(e.matches)
-    mq.addEventListener('change', handler)
-    return () => mq.removeEventListener('change', handler)
-  }, [])
 
   const showToast = (msg) => {
     setToast(msg)
@@ -242,7 +233,6 @@ function AgendaPageInner() {
             appointments={appointments}
             onCellClick={handleCellClick}
             onAppointmentClick={handleAppointmentClick}
-            isMobile={isMobile}
           />
         )}
       </div>

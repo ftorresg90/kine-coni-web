@@ -74,32 +74,29 @@ function groupByDay(appointments, weekDays) {
   return map
 }
 
-export default function WeekCalendar({ weekStart, appointments, onCellClick, onAppointmentClick, isMobile }) {
+export default function WeekCalendar({ weekStart, appointments, onCellClick, onAppointmentClick }) {
   const weekDays = useMemo(() => buildWeekDays(weekStart), [weekStart])
   const byDay = useMemo(() => groupByDay(appointments, weekDays), [appointments, weekDays])
 
-  // On mobile we only show today (or Monday if today is outside the week)
+  // Always show 7 days, allowing horizontal overflow on smaller screens
   const visibleDays = useMemo(() => {
-    if (!isMobile) return weekDays.map((d, i) => ({ day: d, index: i }))
-    const todayIdx = weekDays.findIndex(isToday)
-    const idx = todayIdx >= 0 ? todayIdx : 0
-    return [{ day: weekDays[idx], index: idx }]
-  }, [weekDays, isMobile])
+    return weekDays.map((d, i) => ({ day: d, index: i }))
+  }, [weekDays])
 
   const colCount = visibleDays.length
 
-  // Build grid template: 1 time column + N day columns
-  const gridTemplateColumns = `56px repeat(${colCount}, minmax(0, 1fr))`
+  // Build grid template: 1 time column + 7 day columns. Minimum day width 120px for mobile.
+  const gridTemplateColumns = `56px repeat(${colCount}, minmax(120px, 1fr))`
 
   return (
     <div className="overflow-x-auto" role="grid" aria-label="Calendario semanal">
       {/* Day header row */}
       <div
-        style={{ display: 'grid', gridTemplateColumns, position: 'sticky', top: 0, zIndex: 10 }}
-        className="bg-white/90 border-b border-nude-dark"
+        style={{ display: 'grid', gridTemplateColumns, position: 'sticky', top: 0, zIndex: 20 }}
+        className="bg-white/95 border-b border-nude-dark backdrop-blur-sm"
       >
-        {/* Empty corner above time labels */}
-        <div className="h-12" />
+        {/* Empty corner above time labels, sticky left */}
+        <div className="h-12 sticky left-0 z-30 bg-white/95 backdrop-blur-sm" />
         {visibleDays.map(({ day, index }) => {
           const today = isToday(day)
           return (
@@ -122,7 +119,10 @@ export default function WeekCalendar({ weekStart, appointments, onCellClick, onA
       {/* Grid body */}
       <div style={{ display: 'grid', gridTemplateColumns, position: 'relative' }}>
         {/* Time labels column */}
-        <div style={{ display: 'grid', gridTemplateRows: `repeat(${TOTAL_SLOTS}, 40px)` }}>
+        <div 
+          style={{ display: 'grid', gridTemplateRows: `repeat(${TOTAL_SLOTS}, 40px)`, position: 'sticky', left: 0, zIndex: 10 }}
+          className="bg-white/95 backdrop-blur-sm border-r border-nude-dark/50"
+        >
           {HOUR_LABELS.map((label, slotIdx) => (
             <div
               key={slotIdx}
