@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import AppointmentCard from './AppointmentCard'
 
 // Calendar range: 08:00 – 20:00 in 30-minute slots
@@ -75,46 +75,100 @@ function groupByDay(appointments, weekDays) {
 }
 
 export default function WeekCalendar({ weekStart, appointments, onCellClick, onAppointmentClick }) {
+  const [isMobile, setIsMobile] = useState(false)
+  const [selectedDayIndex, setSelectedDayIndex] = useState(0)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)')
+    setIsMobile(mq.matches)
+    const handler = (e) => setIsMobile(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
+
   const weekDays = useMemo(() => buildWeekDays(weekStart), [weekStart])
   const byDay = useMemo(() => groupByDay(appointments, weekDays), [appointments, weekDays])
 
-  // Always show 7 days, allowing horizontal overflow on smaller screens
-  const visibleDays = useMemo(() => {
-    return weekDays.map((d, i) => ({ day: d, index: i }))
+  useEffect(() => {
+    const todayIdx = weekDays.findIndex(isToday)
+    setSelectedDayIndex(todayIdx >= 0 ? todayIdx : 0)
   }, [weekDays])
+
+  const visibleDays = useMemo(() => {
+    if (isMobile) {
+      return [{ day: weekDays[selectedDayIndex], index: selectedDayIndex }]
+    }
+    return weekDays.map((d, i) => ({ day: d, index: i }))
+  }, [weekDays, isMobile, selectedDayIndex])
 
   const colCount = visibleDays.length
 
-  // Build grid template: 1 time column + 7 day columns. Minimum day width 120px for mobile.
-  const gridTemplateColumns = `56px repeat(${colCount}, minmax(120px, 1fr))`
+  // On desktop 7 days minmax 120px. On mobile 1 day spanning remaining width.
+  const gridTemplateColumns = isMobile
+    ? `56px minmax(0, 1fr)`
+    : `56px repeat(${colCount}, minmax(120px, 1fr))`
 
   return (
-    <div className="overflow-x-auto" role="grid" aria-label="Calendario semanal">
-      {/* Day header row */}
-      <div
-        style={{ display: 'grid', gridTemplateColumns, position: 'sticky', top: 0, zIndex: 20 }}
-        className="bg-white/95 border-b border-nude-dark backdrop-blur-sm"
-      >
-        {/* Empty corner above time labels, sticky left */}
-        <div className="h-12 sticky left-0 z-30 bg-white/95 backdrop-blur-sm" />
-        {visibleDays.map(({ day, index }) => {
-          const today = isToday(day)
-          return (
-            <div
-              key={index}
-              className={`h-12 flex flex-col items-center justify-center border-l border-nude-dark ${today ? 'bg-rosado/10' : ''}`}
-              aria-label={`${DAY_LABELS[index]} ${day.getDate()} de ${MONTH_NAMES[day.getMonth()]}`}
-            >
-              <span className={`font-sans text-xs font-semibold uppercase tracking-wide ${today ? 'text-rosado-dark' : 'text-vino/50'}`}>
-                {DAY_LABELS[index]}
-              </span>
-              <span className={`font-serif font-bold text-base leading-none ${today ? 'text-vino' : 'text-vino/70'}`}>
-                {day.getDate()}
-              </span>
-            </div>
-          )
-        })}
-      </div>
+    <div className="flex flex-col h-full bg-white/70 overflow-hidden" role="grid" aria-label="Calendario semanal">
+      {/* Mobile Day Strip */}
+      {isMobile && (
+        <div className="flex items-center justify-between px-2 py-3 bg-white/95 border-b border-nude-dark sticky top-0 z-30 shadow-sm backdrop-blur-md">
+          {weekDays.map((d, i) => {
+            const active = i === selectedDayIndex
+            const today = isToday(d)
+            return (
+              <button
+                key={i}
+                onClick={() => setSelectedDayIndex(i)}
+                aria-label={`Ver ${DAY_LABELS[i]} ${d.getDate()}`}
+                className={`flex flex-col items-center justify-center w-[13%] h-14 rounded-xl transition-all ${
+                  active
+                    ? 'bg-vino text-nude shadow-md scale-105 ring-1 ring-vino/30'
+                    : today
+                    ? 'bg-rosado/15 text-rosado-dark'
+                    : 'text-vino/60 hover:bg-nude'
+                }`}
+              >
+                <span className={`text-[10px] font-bold uppercase tracking-wider mb-0.5 ${active ? 'text-nude/80' : ''}`}>
+                  {DAY_LABELS[i]}
+                </span>
+                <span className={`text-[15px] font-serif font-bold leading-none ${active ? 'text-nude' : ''}`}>
+                  {d.getDate()}
+                </span>
+              </button>
+            )
+          })}
+        </div>
+      )}
+
+      <div className={`overflow-x-auto ${isMobile ? 'flex-1' : ''}`}>
+        {/* Desktop Day Header Row */}
+        {!isMobile && (
+          <div
+            style={{ display: 'grid', gridTemplateColumns, position: 'sticky', top: 0, zIndex: 20 }}
+            className="bg-white/95 border-b border-nude-dark backdrop-blur-sm"
+          >
+            {/* Empty corner above time labels, sticky left */}
+            <div className="h-12 sticky left-0 z-30 bg-white/95 backdrop-blur-sm" />
+            {visibleDays.map(({ day, index }) => {
+              const today = isToday(day)
+              return (
+                <div
+                  key={index}
+                  className={`h-12 flex flex-col items-center justify-center border-l border-nude-dark ${today ? 'bg-rosado/10' : ''}`}
+                  aria-label={`${DAY_LABELS[index]} ${day.getDate()} de ${MONTH_NAMES[day.getMonth()]}`}
+                >
+                  <span className={`font-sans text-xs font-semibold uppercase tracking-wide ${today ? 'text-rosado-dark' : 'text-vino/50'}`}>
+                    {DAY_LABELS[index]}
+                  </span>
+                  <span className={`font-serif font-bold text-base leading-none ${today ? 'text-vino' : 'text-vino/70'}`}>
+                    {day.getDate()}
+                  </span>
+                </div>
+              )
+            })}
+          </div>
+        )}
 
       {/* Grid body */}
       <div style={{ display: 'grid', gridTemplateColumns, position: 'relative' }}>
@@ -150,9 +204,9 @@ export default function WeekCalendar({ weekStart, appointments, onCellClick, onA
                 display: 'grid',
                 gridTemplateRows: `repeat(${TOTAL_SLOTS}, 40px)`,
                 position: 'relative',
-                borderLeft: '1px solid #EDD5D9',
+                borderLeft: isMobile ? 'none' : '1px solid #EDD5D9',
               }}
-              className={todayCol ? 'bg-rosado/5' : ''}
+              className={todayCol && !isMobile ? 'bg-rosado/5' : ''}
               aria-label={`Columna ${DAY_LABELS[index]} ${day.getDate()}`}
             >
               {/* Slot cells (clickable empty cells) */}
@@ -209,6 +263,7 @@ export default function WeekCalendar({ weekStart, appointments, onCellClick, onA
           )
         })}
       </div>
+    </div>
     </div>
   )
 }
