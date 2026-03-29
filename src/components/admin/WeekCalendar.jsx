@@ -76,23 +76,36 @@ function groupByDay(appointments, weekDays) {
 
 export default function WeekCalendar({ weekStart, appointments, onCellClick, onAppointmentClick }) {
   const [isMobile, setIsMobile] = useState(false)
-  const [selectedDayIndex, setSelectedDayIndex] = useState(0)
+  
+  // Calculate default day index
+  const weekDays = useMemo(() => buildWeekDays(weekStart), [weekStart])
+  const byDay = useMemo(() => groupByDay(appointments, weekDays), [appointments, weekDays])
+  
+  const [selectedDayIndex, setSelectedDayIndex] = useState(() => {
+    const todayIdx = weekDays.findIndex(isToday)
+    return todayIdx >= 0 ? todayIdx : 0
+  })
+
+  // Derive state during render when weekStart changes (React recommended approach)
+  const [prevWeekStart, setPrevWeekStart] = useState(weekStart)
+  if (weekStart !== prevWeekStart) {
+    setPrevWeekStart(weekStart)
+    const todayIdx = weekDays.findIndex(isToday)
+    setSelectedDayIndex(todayIdx >= 0 ? todayIdx : 0)
+  }
 
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 767px)')
-    setIsMobile(mq.matches)
     const handler = (e) => setIsMobile(e.matches)
     mq.addEventListener('change', handler)
+    
+    // Defer initial check to avoid synchronous setState inside effect body
+    setTimeout(() => {
+      setIsMobile(mq.matches)
+    }, 0)
+    
     return () => mq.removeEventListener('change', handler)
   }, [])
-
-  const weekDays = useMemo(() => buildWeekDays(weekStart), [weekStart])
-  const byDay = useMemo(() => groupByDay(appointments, weekDays), [appointments, weekDays])
-
-  useEffect(() => {
-    const todayIdx = weekDays.findIndex(isToday)
-    setSelectedDayIndex(todayIdx >= 0 ? todayIdx : 0)
-  }, [weekDays])
 
   const visibleDays = useMemo(() => {
     if (isMobile) {
