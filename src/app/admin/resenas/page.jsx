@@ -21,7 +21,12 @@ export default function ResenasPage() {
     setLoading(false)
   }
 
-  useEffect(() => { loadReviews() }, [])
+  useEffect(() => {
+    supabase.from('reviews').select('*').order('sort_order').then(({ data }) => {
+      setReviews(data || [])
+      setLoading(false)
+    })
+  }, [])
 
   const showToast = (msg) => { setToast(msg); setTimeout(() => setToast(''), 3000) }
 

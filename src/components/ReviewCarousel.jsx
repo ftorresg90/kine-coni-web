@@ -23,14 +23,13 @@ export default function ReviewCarousel({ reviews }) {
   }, [maxIndex])
 
   useEffect(() => {
-    if (!mounted) return
     const handleResize = () => goTo(0)
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
-  }, [mounted, goTo])
+  }, [goTo])
 
   useEffect(() => {
-    if (!mounted || paused) return
+    if (paused) return
 
     // Respect prefers-reduced-motion: stop auto-play
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -43,7 +42,7 @@ export default function ReviewCarousel({ reviews }) {
       })
     }, 6000)
     return () => clearInterval(timer)
-  }, [mounted, maxIndex, paused])
+  }, [maxIndex, paused])
 
   const handleKeyDown = (e) => {
     if (e.key === 'ArrowLeft') {
@@ -75,7 +74,7 @@ export default function ReviewCarousel({ reviews }) {
       <div
         className="review-track flex gap-6"
         aria-live={paused ? 'polite' : 'off'}
-        style={{ transform: `translateX(-${mounted ? current * (100 / slidesVisible()) : 0}%)`, transition: 'transform 0.5s ease-out' }}
+        style={{ transform: `translateX(-${current * (100 / slidesVisible())}%)`, transition: 'transform 0.5s ease-out' }}
       >
         {reviews.map((review, index) => (
           <div key={review.id}

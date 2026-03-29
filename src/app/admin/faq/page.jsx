@@ -21,7 +21,12 @@ export default function FaqPage() {
     setLoading(false)
   }
 
-  useEffect(() => { loadFaqs() }, [])
+  useEffect(() => {
+    supabase.from('faqs').select('*').order('sort_order').then(({ data }) => {
+      setFaqs(data || [])
+      setLoading(false)
+    })
+  }, [])
 
   const showToast = (msg) => { setToast(msg); setTimeout(() => setToast(''), 3000) }
 

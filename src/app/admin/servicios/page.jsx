@@ -20,7 +20,10 @@ export default function ServiciosPage() {
   }
 
   useEffect(() => {
-    loadServices()
+    supabase.from('services').select('*').order('sort_order').then(({ data }) => {
+      setServices(data || [])
+      setLoading(false)
+    })
   }, [])
 
   const showToast = (msg) => {

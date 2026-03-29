@@ -33,7 +33,12 @@ export default function ReservasPage() {
     setLoading(false)
   }
 
-  useEffect(() => { loadBookings() }, [])
+  useEffect(() => {
+    supabase.from('bookings').select('*').order('created_at', { ascending: false }).then(({ data }) => {
+      setBookings(data || [])
+      setLoading(false)
+    })
+  }, [])
 
   const showToast = (msg) => { setToast(msg); setTimeout(() => setToast(''), 3000) }
 

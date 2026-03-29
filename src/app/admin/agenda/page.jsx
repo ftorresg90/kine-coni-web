@@ -67,12 +67,14 @@ function AgendaPageInner() {
     setTimeout(() => setToast(''), 3500)
   }
 
+  const weekStartISO = weekStart.toISOString()
+
   const loadAppointments = useCallback(async () => {
     setLoading(true)
     setError(null)
     try {
-      const from = weekStart.toISOString()
-      const to = addDays(weekStart, 7).toISOString()
+      const from = weekStartISO
+      const to = addDays(new Date(weekStartISO), 7).toISOString()
       const url = `/api/admin/appointments?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}&pageSize=200`
       const res = await fetch(url)
       if (!res.ok) throw new Error('Error al cargar las citas.')
@@ -83,7 +85,7 @@ function AgendaPageInner() {
     } finally {
       setLoading(false)
     }
-  }, [weekStart.toISOString()])
+  }, [weekStartISO])
 
   useEffect(() => {
     loadAppointments()
